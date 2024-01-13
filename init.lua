@@ -11,7 +11,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-vim.opt.fileformats = "unix"
+vim.opt.fileformats = "unix,dos"
 vim.opt.swapfile = false
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
