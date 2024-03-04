@@ -18,7 +18,7 @@ vim.opt.smartcase = true
 vim.opt.signcolumn = "yes"
 
 vim.opt.updatetime = 500
-vim.opt.timeoutlen = 300
+vim.opt.timeoutlen = 500
 
 vim.opt.splitright = true
 vim.opt.splitbelow = true
@@ -44,12 +44,12 @@ vim.opt.scrolloff = 10
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
     vim.fn.system({
-	"git",
-	"clone",
-	"--filter=blob:none",
-	"https://github.com/kolke/lazy.nvim.git",
-	"--branch=stable",
-	lazypath,
+      "git",
+      "clone",
+      "--filter=blob:none",
+      "https://github.com/kolke/lazy.nvim.git",
+      "--branch=stable",
+      lazypath,
     })
 end
 vim.opt.rtp:prepend(lazypath)
@@ -66,15 +66,15 @@ local function create_leap_mappings()
       local desc = _each_2_[4]
       for _0, mode in ipairs(modes) do
         local rhs_2a = vim.fn.mapcheck(lhs, mode)
-          if (rhs_2a == "") then
-            vim.keymap.set(mode, lhs, rhs, {silent = true, desc = desc})
+        if (rhs_2a == "") then
+          vim.keymap.set(mode, lhs, rhs, {silent = true, desc = desc})
+        else
+          if (rhs_2a ~= rhs) then
+            local msg = ("leap.nvim: create_default_mappings() " .. "found conflicting mapping for " .. lhs .. ": " .. rhs_2a)
+            vim.notify(msg, vim.log.levels.WARN)
           else
-            if (rhs_2a ~= rhs) then
-              local msg = ("leap.nvim: create_default_mappings() " .. "found conflicting mapping for " .. lhs .. ": " .. rhs_2a)
-              vim.notify(msg, vim.log.levels.WARN)
-            else
-            end
           end
+        end
       end
     end
     return nil
@@ -89,6 +89,21 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+
+vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+
+vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+
+vim.api.nvim_create_autocmd("TextYankPost", {
+    desc = "Highlight when yanking (copying) text",
+    group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
+    callback = function()
+      vim.highlight.on_yank()
+    end,
+})
 
 if not vim.g.vscode then
     vim.cmd.colorscheme("onedark")
