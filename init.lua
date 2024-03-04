@@ -18,7 +18,7 @@ vim.opt.smartcase = true
 vim.opt.signcolumn = "yes"
 
 vim.opt.updatetime = 500
-vim.opt.timeoutlen = 500
+vim.opt.timeoutlen = 300
 
 vim.opt.splitright = true
 vim.opt.splitbelow = true
