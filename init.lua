@@ -56,7 +56,6 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("plugins", {defaults = {lazy = true}})
 
--- keymap for leap
 local function create_leap_mappings()
     for _, _1_ in ipairs({{{"n", "x", "o"}, "s", "<Plug>(leap-forward)", "Leap forward"}, {{"n", "o"}, "S", "<Plug>(leap-backward)", "Leap backward"}, {{"n", "x", "o"}, "gs", "<Plug>(leap-from-window)", "Leap from window"}}) do
       local _each_2_ = _1_
