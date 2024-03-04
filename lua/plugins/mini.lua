@@ -17,7 +17,7 @@ return { -- Collection of various small independent plugins/modules
             delete = "ds", -- Delete surrounding
             find = "fs", -- Find surrounding (to the right)
             find_left = "Fs", -- Find surrounding (to the left)
-            highlight = false, -- Highlight surrounding
+            highlight = "", -- Highlight surrounding
             replace = "rs", -- Replace surrounding
             update_n_lines = "ns", -- Update `n_lines`
             suffix_last = "l", -- Suffix to search with "prev" method
