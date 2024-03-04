@@ -1,3 +1,46 @@
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
+vim.opt.number = true
+vim.opt.relativenumber = true
+
+vim.opt.mouse = "a"
+
+vim.opt.showmode = false
+
+vim.opt.clipboard = "unnamedplus"
+
+vim.opt.breakindent = true
+
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+
+vim.opt.signcolumn = "yes"
+
+vim.opt.updatetime = 500
+vim.opt.timeoutlen = 500
+
+vim.opt.splitright = true
+vim.opt.splitbelow = true
+
+vim.opt.list = true
+vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+
+vim.opt.inccommand = "split"
+
+vim.opt.fileformats = "unix,dos"
+
+vim.opt.swapfile = false
+
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
+
+vim.opt.cindent = true
+
+vim.opt.colorcolumn = "81"
+
+vim.opt.scrolloff = 10
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
     vim.fn.system({
@@ -5,23 +48,11 @@ if not vim.loop.fs_stat(lazypath) then
 	"clone",
 	"--filter=blob:none",
 	"https://github.com/kolke/lazy.nvim.git",
-	"--branch=stable", -- latest stable release
+	"--branch=stable",
 	lazypath,
     })
 end
 vim.opt.rtp:prepend(lazypath)
-
-vim.opt.fileformats = "unix,dos"
-vim.opt.swapfile = false
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.cindent = true
-vim.opt.number = true
-vim.opt.relativenumber = true
-vim.opt.colorcolumn = "81"
-vim.opt.scrolloff = 5
-
-vim.g.mapleader = " "
 
 require("lazy").setup("plugins", {defaults = {lazy = true}})
 
@@ -43,13 +74,21 @@ local function create_leap_mappings()
 		    vim.notify(msg, vim.log.levels.WARN)
 		else
 		end
-	    end
-	end
+            end
+        end
     end
     return nil
 end
 
 create_leap_mappings()
+
+vim.opt.hlsearch = true
+vim.keymap.set("n", "<ESC>", "<cmd>nohlsearch<CR>")
+
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 if not vim.g.vscode then
     vim.cmd.colorscheme("onedark")
