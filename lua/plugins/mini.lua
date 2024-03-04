@@ -1,5 +1,5 @@
 return { -- Collection of various small independent plugins/modules
-    "echssnovski/mini.nvim",
+    "echasnovski/mini.nvim",
     event = "VeryLazy",
     config = function()
       -- Better Around/Inside textobjects
