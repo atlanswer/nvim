@@ -11,20 +11,20 @@ return { -- Collection of various small independent plugins/modules
       require("mini.ai").setup { n_lines = 500 }
 
       -- Add/delete/replace surroundings (brackets, quotes, etc.)
-      require("mini.surround").setup {
-        mappings = {
-            add = "ys", -- Add surrounding in Normal and Visual modes
-            delete = "ds", -- Delete surrounding
-            find = "fs", -- Find surrounding (to the right)
-            find_left = "Fs", -- Find surrounding (to the left)
-            highlight = "", -- Highlight surrounding
-            replace = "rs", -- Replace surrounding
-            update_n_lines = "ns", -- Update `n_lines`
-            suffix_last = "l", -- Suffix to search with "prev" method
-            suffix_next = "n", -- Suffix to search with "next" method
-        },
-      }
-
+      -- require("mini.surround").setup {
+      --   mappings = {
+      --       add = "ys", -- Add surrounding in Normal and Visual modes
+      --       delete = "ds", -- Delete surrounding
+      --       find = "fs", -- Find surrounding (to the right)
+      --       find_left = "Fs", -- Find surrounding (to the left)
+      --       highlight = "", -- Highlight surrounding
+      --       replace = "rs", -- Replace surrounding
+      --       update_n_lines = "ns", -- Update `n_lines`
+      --       suffix_last = "l", -- Suffix to search with "prev" method
+      --       suffix_next = "n", -- Suffix to search with "next" method
+      --   },
+      -- }
+      --
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
       --  and try some other statusline plugin
