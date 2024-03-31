@@ -105,5 +105,11 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 if not vim.g.vscode then
+    vim.opt.termguicolors = true
+    vim.opt.guicursor = "n-v-c:block-Cursor,\z
+                         i-ci-ve:ver50-iCursor-\z
+                         blinkwait700-blinkoff300-blinkon300,\z
+                         r-cr:hor20,o:hor50,\z
+                         sm:blinkwait500-blinkoff300-blinkon200"
     vim.cmd.colorscheme("onedark")
 end
