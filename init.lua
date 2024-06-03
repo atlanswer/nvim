@@ -1,6 +1,8 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+vim.g.have_nerd_font = true
+
 vim.opt.number = true
 vim.opt.relativenumber = true
 
@@ -15,8 +17,8 @@ vim.opt.smartcase = true
 
 vim.opt.signcolumn = "yes"
 
-vim.opt.updatetime = 500
-vim.opt.timeoutlen = 300
+vim.opt.updatetime = 250
+vim.opt.timeoutlen = 500
 
 vim.opt.splitright = true
 vim.opt.splitbelow = true
@@ -41,19 +43,22 @@ vim.opt.cindent = true
 
 vim.opt.colorcolumn = "81"
 
+vim.opt.cursorline = true
+
 vim.opt.scrolloff = 10
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
+    local lazyrepo = "https://github.com/folke/lazy.nvim.git"
     vim.fn.system({
       "git",
       "clone",
       "--filter=blob:none",
-      "https://github.com/kolke/lazy.nvim.git",
       "--branch=stable",
+      lazyrepo,
       lazypath,
     })
-end
+end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("plugins", {defaults = {lazy = true}})
