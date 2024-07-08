@@ -97,7 +97,9 @@ vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 
 -- Preserve copy
-vim.keymap.set("x", "<leader>p", "\"_dP")
+vim.keymap.set("n", "<leader>p", "\"+p")
+vim.keymap.set("n", "<leader>P", "\"+P")
+vim.keymap.set("x", "<leader>p", "\"_d\"+P")
 
 -- System clipboard
 vim.keymap.set("n", "<leader>y", "\"+y")
