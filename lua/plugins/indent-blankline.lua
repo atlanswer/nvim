@@ -6,4 +6,5 @@ return {
     main = "ibl",
     event = "VeryLazy",
     opts = {},
+    cond = not vim.g.vscode,
 }
