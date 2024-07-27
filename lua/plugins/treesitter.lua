@@ -6,7 +6,7 @@ return { -- Highlight, edit, and navigate code
       require("nvim-treesitter.configs").setup {
         ensure_installed = {
           "html", "lua", "markdown", "vim", "vimdoc",
-          "typescript", "json", "python",
+          "typescript", "json",
         },
         auto_install = true,
         highlight = { enable = true },
