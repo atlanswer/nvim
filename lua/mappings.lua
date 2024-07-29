@@ -20,6 +20,9 @@ vim.keymap.set("n", "<leader>Y", "\"+Y")
 vim.keymap.set("n", "<leader>d", "\"_d")
 vim.keymap.set("v", "<leader>d", "\"_d")
 
+-- Oil file explorer
+vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "(Oil) Open parent directory" })
+
 -- Search
 vim.opt.hlsearch = true
 vim.keymap.set("n", "<ESC>", "<cmd>nohlsearch<CR>")
