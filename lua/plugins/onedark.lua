@@ -1,6 +1,8 @@
 return {
-    "joshdick/onedark.vim",
-    lazy = false,
+    "navarasu/onedark.nvim",
     priority = 1000,
+    opts = {
+        style = "warmer",
+    },
     cond = not vim.g.vscode,
 }
