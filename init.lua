@@ -108,5 +108,5 @@ if not vim.g.vscode then
 end
 
 -- Key mappings
-require "mappings"
+require "keymaps"
 
