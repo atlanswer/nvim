@@ -69,33 +69,7 @@ if not vim.uv.fs_stat(lazypath) then
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup("plugins", { defaults = { lazy = true } })
-
--- Remap Leap mappings
-local function create_leap_mappings()
-    for _, _1_ in ipairs({{{"n", "x", "o"}, "s", "<Plug>(leap-forward)", "Leap forward"}, {{"n", "o"}, "S", "<Plug>(leap-backward)", "Leap backward"}, {{"n", "x", "o"}, "gs", "<Plug>(leap-from-window)", "Leap from window"}}) do
-        local _each_2_ = _1_
-        local modes = _each_2_[1]
-        local lhs = _each_2_[2]
-        local rhs = _each_2_[3]
-        local desc = _each_2_[4]
-        for _0, mode in ipairs(modes) do
-            local rhs_2a = vim.fn.mapcheck(lhs, mode)
-            if (rhs_2a == "") then
-                vim.keymap.set(mode, lhs, rhs, { silent = true, desc = desc })
-            else
-                if (rhs_2a ~= rhs) then
-                    local msg = ("leap.nvim: create_default_mappings() " .. "found conflicting mapping for " .. lhs .. ": " .. rhs_2a)
-                    vim.notify(msg, vim.log.levels.WARN)
-                else
-                end
-            end
-        end
-    end
-    return nil
-end
-
-create_leap_mappings()
+require("lazy").setup("plugins")
 
 if not vim.g.vscode then
     vim.opt.termguicolors = true
@@ -109,4 +83,3 @@ end
 
 -- Key mappings
 require "keymaps"
-
