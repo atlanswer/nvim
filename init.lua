@@ -51,6 +51,8 @@ vim.opt.cursorline = true
 
 vim.opt.scrolloff = 10
 
+vim.opt.hlsearch = true
+
 -- Load Lazy
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
