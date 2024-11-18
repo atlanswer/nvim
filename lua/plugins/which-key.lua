@@ -2,6 +2,9 @@ return {
     "folke/which-key.nvim",
     event = "VeryLazy",
     opts = {
+        icons = {
+            mappings = vim.g.have_nerd_font,
+        },
         spec = {
             { "<leader>c", group = "[C]ode" },
             { "<leader>d", group = "[D]ocument" },

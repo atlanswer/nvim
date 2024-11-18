@@ -4,8 +4,6 @@ return {
         ft = "lua", -- only load on lua files
         opts = {
             library = {
-                -- See the configuration section for more details
-                -- Load luvit types when the `vim.uv` word is found
                 { path = "luvit-meta/library", words = { "vim%.uv" } },
             },
         },
@@ -13,32 +11,33 @@ return {
     },
     -- optional `vim.uv` typings
     { "Bilal2453/luvit-meta", lazy = true, cond = not vim.g.vscode, },
-    { -- optional completion source for require statements and module annotations
-        "hrsh7th/nvim-cmp",
-        opts = function(_, opts)
-            opts.sources = opts.sources or {}
-            table.insert(opts.sources, {
-                name = "lazydev",
-                group_index = 0, -- set group index to 0 to skip loading LuaLS completions
-            })
-        end,
-    },
+    -- { -- optional completion source for require statements and module annotations
+    --     "hrsh7th/nvim-cmp",
+    --     opts = function(_, opts)
+    --         opts.sources = opts.sources or {}
+    --         table.insert(opts.sources, {
+    --             name = "lazydev",
+    --             group_index = 0, -- set group index to 0 to skip loading LuaLS completions
+    --         })
+    --     end,
+    -- },
     {
         "neovim/nvim-lspconfig",
         dependencies = {
-            { 'williamboman/mason.nvim', config = true },
-            'williamboman/mason-lspconfig.nvim',
-            'WhoIsSethDaniel/mason-tool-installer.nvim',
+            { "williamboman/mason.nvim", config = true },
+            "williamboman/mason-lspconfig.nvim",
+            "WhoIsSethDaniel/mason-tool-installer.nvim",
             { "j-hui/fidget.nvim",       opts = {}, },
-            'hrsh7th/cmp-nvim-lsp',
+            "hrsh7th/cmp-nvim-lsp",
         },
         cond = not vim.g.vscode,
         config = function()
-            vim.api.nvim_create_autocmd('LspAttach', {
-                group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
+            vim.api.nvim_create_autocmd("LspAttach", {
+                group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
                 callback = function(event)
-                    local map = function(keys, func, desc)
-                        vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
+                    local map = function(keys, func, desc, mode)
+                        mode = mode or "n"
+                        vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
                     end
 
                     -- Jump to the definition of the word under your cursor.
@@ -173,17 +172,17 @@ return {
             --    :Mason
             --
             --  You can press `g?` for help in this menu.
-            require('mason').setup()
+            require("mason").setup()
 
             -- You can add other tools here that you want Mason to install
             -- for you, so that they are available from within Neovim.
             local ensure_installed = vim.tbl_keys(servers or {})
             vim.list_extend(ensure_installed, {
-                'stylua', -- Used to format Lua code
+                "stylua", -- Used to format Lua code
             })
-            require('mason-tool-installer').setup { ensure_installed = ensure_installed }
+            require("mason-tool-installer").setup { ensure_installed = ensure_installed }
 
-            require('mason-lspconfig').setup {
+            require("mason-lspconfig").setup {
                 handlers = {
                     function(server_name)
                         local server = servers[server_name] or {}

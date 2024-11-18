@@ -1,11 +1,15 @@
 return {
     "nvim-treesitter/nvim-treesitter",
+    event = "VeryLazy",
     build = ":TSUpdate",
-    dependencies = {
-        { "j-hui/fidget.nvim", },
-    },
+    main = "nvim-treesitter.configs",
     opts = {
-        ensure_installed = { 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
+        ensure_installed = {
+            "bash", "diff", "html", "lua", "luadoc",
+            "markdown", "markdown_inline",
+            "query", "vim", "vimdoc",
+            "javascript", "typescript",
+        },
         -- Autoinstall languages that are not installed
         auto_install = true,
         highlight = {
