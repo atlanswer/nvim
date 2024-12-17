@@ -115,12 +115,14 @@ vim.keymap.set("n", "<leader>d", '"_d', { desc = "Delete into void" })
 vim.keymap.set("v", "<leader>d", '"_d')
 
 -- Oil file explorer
-vim.keymap.set(
-    "n",
-    "-",
-    require("oil").open_float,
-    { desc = "(Oil) Open parent directory" }
-)
+if not vim.g.vscode then
+    vim.keymap.set(
+        "n",
+        "-",
+        require("oil").open_float,
+        { desc = "(Oil) Open parent directory" }
+    )
+end
 
 -- Search
 vim.keymap.set(
