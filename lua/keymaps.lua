@@ -61,7 +61,7 @@ vim.keymap.set("n", "<leader>d", "\"_d")
 vim.keymap.set("v", "<leader>d", "\"_d")
 
 -- Oil file explorer
-vim.keymap.set("n", "-", "<cmd>Oil<cr>", { desc = "(Oil) Open parent directory" })
+vim.keymap.set("n", "-", require("oil").open_float, { desc = "(Oil) Open parent directory" })
 
 -- Search
 vim.keymap.set({ "i", "n" }, "<ESC>", "<cmd>nohlsearch<cr><esc>",
