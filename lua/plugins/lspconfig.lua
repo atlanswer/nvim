@@ -17,7 +17,7 @@ return {
             "williamboman/mason-lspconfig.nvim",
             "WhoIsSethDaniel/mason-tool-installer.nvim",
             { "j-hui/fidget.nvim", opts = {} },
-            "hrsh7th/cmp-nvim-lsp",
+            "saghen/blink.cmp",
         },
         cond = not vim.g.vscode,
         config = function()
@@ -179,7 +179,7 @@ return {
             capabilities = vim.tbl_deep_extend(
                 "force",
                 capabilities,
-                require("cmp_nvim_lsp").default_capabilities()
+                require("blink.cmp").get_lsp_capabilities()
             )
 
             -- Enable the following language servers
@@ -212,7 +212,7 @@ return {
                                 callSnippet = "Replace",
                             },
                             -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-                            -- diagnostics = { disable = { 'missing-fields' } },
+                            diagnostics = { disable = { "missing-fields" } },
                         },
                     },
                 },
