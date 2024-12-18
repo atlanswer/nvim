@@ -20,7 +20,7 @@ return {
                     else
                         gitsigns.nav_hunk "next"
                     end
-                end)
+                end, { desc = "Move to next hunk" })
 
                 map("n", "[c", function()
                     if vim.wo.diff then
@@ -28,7 +28,7 @@ return {
                     else
                         gitsigns.nav_hunk "prev"
                     end
-                end)
+                end, { desc = "Move to previous hunk" })
 
                 -- Actions
                 map(
