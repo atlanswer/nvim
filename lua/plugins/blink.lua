@@ -6,7 +6,7 @@ return {
     },
 
     -- use a release tag to download pre-built binaries
-    version = "v0.*",
+    version = "*",
     -- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
     -- build = 'cargo build --release',
     -- If you use nix, you can build from source using latest nightly rust with:
@@ -18,9 +18,13 @@ return {
         -- 'default' for mappings similar to built-in completion
         -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
         -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
-        -- see the "default configuration" section below for full documentation on how to define
-        -- your own keymap.
+        -- see the "default configuration" section below for full documentation on how to define your own keymap.
         keymap = { preset = "super-tab" },
+
+        completion = {
+            keyword = { range = "full" },
+            ghost_text = { enabled = true },
+        },
 
         appearance = {
             -- Sets the fallback highlight groups to nvim-cmp's highlight groups
@@ -39,11 +43,11 @@ return {
             -- optionally disable cmdline completions
             -- cmdline = {},
             providers = {
-                -- dont show LuaLS require statements when lazydev has items
-                lsp = { fallback_for = { "lazydev" } },
                 lazydev = {
                     name = "LazyDev",
                     module = "lazydev.integrations.blink",
+                    -- make lazydev completions top priority (see `:h blink.cmp`)
+                    score_offset = 100,
                 },
             },
         },
