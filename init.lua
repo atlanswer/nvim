@@ -62,15 +62,15 @@ vim.opt.guicursor = "n-v-c:block-Cursor,\z
 
 -- Set terminal to pwsh on Windows
 if vim.fn.index(vim.fn.keys(vim.fn.environ()), "shell", 0, 1) == -1 then
-    vim.g.shell = "pwsh"
+    vim.opt.shell = "pwsh"
 end
 
 -- Disable line number in terminal
 vim.api.nvim_create_autocmd("TermOpen", {
     group = vim.api.nvim_create_augroup("nvim-term-custom", { clear = true }),
     callback = function()
-        vim.opt.number = false
-        vim.opt.relativenumber = false
+        vim.wo.number = false
+        vim.wo.relativenumber = false
     end,
 })
 
