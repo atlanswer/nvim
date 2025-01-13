@@ -53,6 +53,13 @@ vim.opt.scrolloff = 10
 
 vim.opt.hlsearch = true
 
+vim.opt.termguicolors = true
+vim.opt.guicursor = "n-v-c:block-Cursor,\z
+                     i-ci-ve:ver50-iCursor-\z
+                     blinkwait700-blinkoff300-blinkon300,\z
+                     r-cr:hor20,o:hor50,\z
+                     sm:blinkwait500-blinkoff300-blinkon200"
+
 -- Load Lazy
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -73,15 +80,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup "plugins"
 
-if not vim.g.vscode then
-    vim.opt.termguicolors = true
-    vim.opt.guicursor = "n-v-c:block-Cursor,\z
-                         i-ci-ve:ver50-iCursor-\z
-                         blinkwait700-blinkoff300-blinkon300,\z
-                         r-cr:hor20,o:hor50,\z
-                         sm:blinkwait500-blinkoff300-blinkon200"
-    vim.cmd.colorscheme "onedark"
-end
+vim.cmd.colorscheme "onedark"
 
 -- Key mappings
 require "keymaps"
