@@ -60,6 +60,20 @@ vim.opt.guicursor = "n-v-c:block-Cursor,\z
                      r-cr:hor20,o:hor50,\z
                      sm:blinkwait500-blinkoff300-blinkon200"
 
+-- Set terminal to pwsh on Windows
+if vim.fn.index(vim.fn.keys(vim.fn.environ()), "shell", 0, 1) == -1 then
+    vim.g.shell = "pwsh"
+end
+
+-- Disable line number in terminal
+vim.api.nvim_create_autocmd("TermOpen", {
+    group = vim.api.nvim_create_augroup("nvim-term-custom", { clear = true }),
+    callback = function()
+        vim.opt.number = false
+        vim.opt.relativenumber = false
+    end,
+})
+
 -- Load Lazy
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
