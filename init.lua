@@ -12,14 +12,16 @@ vim.opt.mouse = "a"
 
 vim.opt.showmode = false
 
-vim.opt.breakindent = true
-
+vim.opt.swapfile = false
 vim.opt.undofile = true
 
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
+vim.opt.cursorline = true
+
 vim.opt.signcolumn = "yes"
+vim.opt.colorcolumn = "81"
 
 vim.opt.updatetime = 250
 vim.opt.timeoutlen = 800
@@ -31,12 +33,9 @@ vim.opt.list = true
 vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
 vim.opt.inccommand = "split"
-
 vim.opt.incsearch = true
 
 vim.opt.fileformats = "unix,dos"
-
-vim.opt.swapfile = false
 
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
@@ -44,10 +43,7 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 
 vim.opt.cindent = true
-
-vim.opt.colorcolumn = "81"
-
-vim.opt.cursorline = true
+vim.opt.breakindent = true
 
 vim.opt.scrolloff = 10
 
@@ -60,6 +56,33 @@ vim.opt.guicursor = "n-v-c:block-Cursor,\z
                      r-cr:hor20,o:hor50,\z
                      sm:blinkwait500-blinkoff300-blinkon200"
 
+-- Add empty blank line
+vim.api.nvim_create_autocmd("BufWritePre", {
+    desc = "Add blank line at the end of file",
+    group = vim.api.nvim_create_augroup(
+        "nvim-blank-line-eof",
+        { clear = true }
+    ),
+    callback = function()
+        local last_line = vim.api.nvim_buf_get_lines(0, -2, -1, true)[1]
+        if vim.fn.empty(last_line) == 0 then
+            vim.api.nvim_buf_set_lines(0, -1, -1, true, { "" })
+        end
+    end,
+})
+
+-- Highlight yank
+vim.api.nvim_create_autocmd("TextYankPost", {
+    desc = "Highlight when yanking (copying) text",
+    group = vim.api.nvim_create_augroup(
+        "nvim-highlight-yank",
+        { clear = true }
+    ),
+    callback = function()
+        vim.highlight.on_yank()
+    end,
+})
+
 -- Set terminal to pwsh on Windows
 if vim.fn.index(vim.fn.keys(vim.fn.environ()), "shell", 0, 1) == -1 then
     vim.opt.shell = "pwsh"
@@ -67,6 +90,7 @@ end
 
 -- Disable line number in terminal
 vim.api.nvim_create_autocmd("TermOpen", {
+    desc = "Disable line number in terminal mode",
     group = vim.api.nvim_create_augroup("nvim-term-custom", { clear = true }),
     callback = function()
         vim.wo.number = false
@@ -98,3 +122,4 @@ vim.cmd.colorscheme "onedark"
 
 -- Key mappings
 require "keymaps"
+

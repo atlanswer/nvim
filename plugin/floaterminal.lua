@@ -43,6 +43,7 @@ local function create_floating_window(opts)
 end
 
 vim.api.nvim_create_autocmd("VimResized", {
+    desc = "Resize floating terminal",
     group = vim.api.nvim_create_augroup("nvim-term-custom", { clear = false }),
     callback = function()
         if vim.api.nvim_win_is_valid(state.floating.win) then
@@ -69,3 +70,4 @@ end, {})
 vim.keymap.set({ "n", "t" }, "<A-t>", function()
     vim.cmd "Floaterm"
 end, { desc = "Toggle floating terminal" })
+
