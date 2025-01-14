@@ -33,5 +33,5 @@ return {
         },
         highlights = {},
     },
-    cond = not vim.g.vscode,
 }
+
