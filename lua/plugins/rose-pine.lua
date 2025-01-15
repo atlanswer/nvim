@@ -8,6 +8,9 @@ return {
             italic = false,
             transparency = false,
         },
+        highlight_groups = {
+            EndOfBuffer = { fg = "base" },
+        },
     },
 }
 
