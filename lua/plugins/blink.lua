@@ -22,8 +22,12 @@ return {
         keymap = { preset = "super-tab" },
 
         completion = {
+            menu = { draw = { treesitter = { "lsp" } } },
             keyword = { range = "full" },
             ghost_text = { enabled = true },
+            list = {
+                selection = { preselect = true, auto_insert = false },
+            },
         },
 
         appearance = {
@@ -60,3 +64,4 @@ return {
     opts_extend = { "sources.default" },
     cond = not vim.g.vscode,
 }
+

@@ -118,7 +118,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup "plugins"
 
-vim.cmd.colorscheme "onedark"
+vim.cmd.colorscheme "rose-pine"
 
 -- Key mappings
 require "keymaps"
