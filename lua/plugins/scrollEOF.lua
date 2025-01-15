@@ -3,3 +3,4 @@ return {
     event = { "CursorMoved", "WinScrolled" },
     opts = {},
 }
+

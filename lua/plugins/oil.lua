@@ -22,3 +22,4 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons" },
     cond = not vim.g.vscode,
 }
+

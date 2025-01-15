@@ -5,3 +5,4 @@ return {
     opts = {},
     cond = not vim.g.vscode,
 }
+

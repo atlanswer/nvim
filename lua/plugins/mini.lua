@@ -2,7 +2,7 @@ return { -- Collection of various small independent plugins/modules
     "echasnovski/mini.nvim",
     event = "VeryLazy",
     config = function()
-        require("mini.ai").setup { n_lines = 500 }
+        require("mini.ai").setup { n_lines = 300 }
 
         local statusline = require "mini.statusline"
         statusline.setup { use_icons = vim.g.have_nerd_font }
@@ -16,3 +16,4 @@ return { -- Collection of various small independent plugins/modules
         end
     end,
 }
+
