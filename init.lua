@@ -23,8 +23,8 @@ vim.opt.cursorline = true
 vim.opt.signcolumn = "yes"
 vim.opt.colorcolumn = "81"
 
-vim.opt.updatetime = 250
-vim.opt.timeoutlen = 800
+vim.opt.updatetime = 500
+vim.opt.timeoutlen = 1000
 
 vim.opt.splitright = true
 vim.opt.splitbelow = true
@@ -55,6 +55,12 @@ vim.opt.guicursor = "n-v-c:block-Cursor,\z
                      blinkwait700-blinkoff300-blinkon300,\z
                      r-cr:hor20,o:hor50,\z
                      sm:blinkwait500-blinkoff300-blinkon200"
+
+-- Fold
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldtext = ""
+vim.opt.foldenable = false
 
 -- Add empty blank line
 vim.api.nvim_create_autocmd("BufWritePre", {
