@@ -63,19 +63,19 @@ vim.opt.foldtext = ""
 vim.opt.foldenable = false
 
 -- Add empty blank line
-vim.api.nvim_create_autocmd("BufWritePre", {
-    desc = "Add blank line at the end of file",
-    group = vim.api.nvim_create_augroup(
-        "nvim-blank-line-eof",
-        { clear = true }
-    ),
-    callback = function()
-        local last_line = vim.api.nvim_buf_get_lines(0, -2, -1, true)[1]
-        if vim.fn.empty(last_line) == 0 then
-            vim.api.nvim_buf_set_lines(0, -1, -1, true, { "" })
-        end
-    end,
-})
+-- vim.api.nvim_create_autocmd("BufWritePre", {
+--     desc = "Add blank line at the end of file",
+--     group = vim.api.nvim_create_augroup(
+--         "nvim-blank-line-eof",
+--         { clear = true }
+--     ),
+--     callback = function()
+--         local last_line = vim.api.nvim_buf_get_lines(0, -2, -1, true)[1]
+--         if vim.fn.empty(last_line) == 0 then
+--             vim.api.nvim_buf_set_lines(0, -1, -1, true, { "" })
+--         end
+--     end,
+-- })
 
 -- Highlight yank
 vim.api.nvim_create_autocmd("TextYankPost", {
@@ -128,4 +128,3 @@ vim.cmd.colorscheme "rose-pine"
 
 -- Key mappings
 require "keymaps"
-

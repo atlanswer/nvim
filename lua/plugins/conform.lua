@@ -23,6 +23,7 @@ return {
             jsonc = { "prettier" },
             javascript = { "prettier" },
             typescript = { "prettier" },
+            css = { "prettier" },
             markdown = { "prettier" },
             tsx = { "prettier" },
             astro = { "prettier" },
@@ -34,4 +35,3 @@ return {
     end,
     cond = not vim.g.vscode,
 }
-
