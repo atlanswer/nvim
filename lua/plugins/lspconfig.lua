@@ -1,19 +1,19 @@
 return {
     {
         "folke/lazydev.nvim",
-        ft = "lua", -- only load on lua files
+        ft = "lua",
         opts = {
             library = {
-                { path = "luvit-meta/library", words = { "vim%.uv" } },
+                -- Load luvit types when the `vim.uv` word is found
+                { path = "${3rd}/luv/library", words = { "vim%.uv" } },
             },
         },
         cond = not vim.g.vscode,
     },
-    { "Bilal2453/luvit-meta", lazy = true, cond = not vim.g.vscode },
     { -- Main LSP Configuration
         "neovim/nvim-lspconfig",
         dependencies = {
-            { "williamboman/mason.nvim", config = true },
+            { "williamboman/mason.nvim", opts = {} },
             "williamboman/mason-lspconfig.nvim",
             "WhoIsSethDaniel/mason-tool-installer.nvim",
             { "j-hui/fidget.nvim", opts = {} },
