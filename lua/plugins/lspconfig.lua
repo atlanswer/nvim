@@ -194,35 +194,14 @@ return {
             local servers = {
                 -- clangd = {},
                 -- gopls = {},
-                basedpyright = {},
-                ruff = {},
+                -- basedpyright = {},
+                -- ruff = {},
                 -- rust_analyzer = {},
-                tinymist = {
-                    settings = {
-                        formatterMode = "typstyle",
-                        formatterPrintWidth = 80,
-                    },
-                },
 
                 -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
                 --
                 -- Some languages (like typescript) have entire language plugins that can be useful:
                 --    https://github.com/pmizio/typescript-tools.nvim
-
-                lua_ls = {
-                    -- cmd = {...},
-                    -- filetypes = { ...},
-                    -- capabilities = {},
-                    settings = {
-                        Lua = {
-                            completion = {
-                                callSnippet = "Replace",
-                            },
-                            -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-                            diagnostics = { disable = { "missing-fields" } },
-                        },
-                    },
-                },
             }
 
             -- Ensure the servers and tools above are installed
@@ -237,8 +216,8 @@ return {
             -- for you, so that they are available from within Neovim.
             local ensure_installed = vim.tbl_keys(servers or {})
             vim.list_extend(ensure_installed, {
-                "stylua", -- Used to format Lua code
-                "prettier",
+                -- "stylua", -- Used to format Lua code
+                -- "prettier",
             })
             require("mason-tool-installer").setup {
                 ensure_installed = ensure_installed,
@@ -259,6 +238,30 @@ return {
                         )
                         require("lspconfig")[server_name].setup(server)
                     end,
+                },
+            }
+
+            -- Windows ARM64
+
+            require("lspconfig").lua_ls.setup {
+                -- cmd = {...},
+                -- filetypes = { ...},
+                -- capabilities = {},
+                settings = {
+                    Lua = {
+                        completion = {
+                            callSnippet = "Replace",
+                        },
+                        -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
+                        diagnostics = { disable = { "missing-fields" } },
+                    },
+                },
+            }
+
+            require("lspconfig").tinymist.setup {
+                settings = {
+                    formatterMode = "typstyle",
+                    formatterPrintWidth = 80,
                 },
             }
         end,

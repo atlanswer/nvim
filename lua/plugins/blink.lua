@@ -12,7 +12,7 @@ return {
     -- If you use nix, you can build from source using latest nightly rust with:
     -- build = 'nix run .#build-plugin',
 
-    ---@module 'blink.cmp'
+    ---@module "blink.cmp"
     ---@type blink.cmp.Config
     opts = {
         -- 'default' for mappings similar to built-in completion
@@ -58,10 +58,16 @@ return {
 
         -- experimental signature help support
         signature = { enabled = true },
+
+        fuzzy = { implementation = "prefer_rust_with_warning" },
+
+        -- Disable for typr
+        enabled = function()
+            return not vim.tbl_contains({ "typr" }, vim.bo.filetype)
+        end,
     },
     -- allows extending the providers array elsewhere in your config
     -- without having to redefine it
     opts_extend = { "sources.default" },
     cond = not vim.g.vscode,
 }
-
