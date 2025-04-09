@@ -6,7 +6,10 @@ return {
         {
             "<leader>f",
             function()
-                require("conform").format { async = true }
+                require("conform").format {
+                    async = true,
+                    lsp_format = "fallback",
+                }
             end,
             mode = "",
             desc = "[F]ormat buffer",
@@ -29,7 +32,6 @@ return {
             astro = { "prettier" },
             toml = { "taplo" },
         },
-        default_format_opts = { lsp_format = "fallback" },
     },
     init = function()
         vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
