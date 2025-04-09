@@ -14,11 +14,15 @@ return {
                 callback = function()
                     if vim.opt_local.modifiable:get() then
                         lint.try_lint()
-                        lint.try_lint "cspell"
                     end
                 end,
             }
         )
+        vim.keymap.set("n", "<leader>cs", function()
+            lint.try_lint "cspell"
+        end, {
+            desc = "[C]heck [S]pelling",
+        })
     end,
     cond = not vim.g.vscode,
 }
