@@ -9,7 +9,43 @@ return {
     },
     cond = not vim.g.vscode,
     config = function()
+        local actions = require "telescope.actions"
+        local telescipeConfig = require "telescope.config"
+
+        local vimgrep_arguments =
+            { unpack(telescipeConfig.values.vimgrep_arguments) }
+        table.insert(vimgrep_arguments, "--hidden")
+        table.insert(vimgrep_arguments, "--glob")
+        table.insert(vimgrep_arguments, "!**/.git/*")
+
         require("telescope").setup {
+            defaults = {
+                vimgrep_arguments = vimgrep_arguments,
+                mapptins = {
+                    i = {
+                        ["<esc>"] = actions.close,
+                    },
+                },
+            },
+            pickers = {
+                find_files = {
+                    find_command = {
+                        "rg",
+                        "--files",
+                        "--hidden",
+                        "--glob",
+                        "!**/.git/*",
+                    },
+                },
+                buffers = {
+                    mappings = {
+                        i = {
+                            ["<c-d>"] = actions.delete_buffer
+                                + actions.move_to_top,
+                        },
+                    },
+                },
+            },
             extensions = {
                 ["ui-select"] = {
                     require("telescope.themes").get_dropdown(),
@@ -136,4 +172,3 @@ return {
         )
     end,
 }
-
