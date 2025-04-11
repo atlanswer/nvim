@@ -21,7 +21,7 @@ return {
         require("telescope").setup {
             defaults = {
                 vimgrep_arguments = vimgrep_arguments,
-                mapptins = {
+                mappings = {
                     i = {
                         ["<esc>"] = actions.close,
                     },
