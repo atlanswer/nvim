@@ -1,5 +1,6 @@
 return {
     "stevearc/oil.nvim",
+    dependencies = { { "echasnovski/mini.nvim", opts = {} } },
     ---@module "oil"
     ---@type oil.SetupOpts
     opts = {
@@ -19,7 +20,5 @@ return {
             padding = 12,
         },
     },
-    dependencies = { "nvim-tree/nvim-web-devicons" },
     cond = not vim.g.vscode,
 }
-

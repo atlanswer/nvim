@@ -21,6 +21,8 @@ return {
         },
         cond = not vim.g.vscode,
         config = function()
+            local lspconfig = require "lspconfig"
+
             vim.api.nvim_create_autocmd("LspAttach", {
                 group = vim.api.nvim_create_augroup(
                     "kickstart-lsp-attach",
@@ -102,22 +104,6 @@ return {
                     -- For example, in C this would take you to the header.
                     map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 
-                    -- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
-                    ---@param client vim.lsp.Client
-                    ---@param method vim.lsp.protocol.Method
-                    ---@param bufnr? integer some lsp support methods only in specific files
-                    ---@return boolean
-                    local function client_supports_method(client, method, bufnr)
-                        if vim.fn.has "nvim-0.11" == 1 then
-                            return client:supports_method(method, bufnr)
-                        else
-                            return client.supports_method(
-                                method,
-                                { bufnr = bufnr }
-                            )
-                        end
-                    end
-
                     -- The following two autocommands are used to highlight references of the
                     -- word under your cursor when your cursor rests there for a little while.
                     --    See `:help CursorHold` for information about when this is executed
@@ -127,8 +113,7 @@ return {
                         vim.lsp.get_client_by_id(event.data.client_id)
                     if
                         client
-                        and client_supports_method(
-                            client,
+                        and client:supports_method(
                             vim.lsp.protocol.Methods.textDocument_documentHighlight,
                             event.buf
                         )
@@ -174,8 +159,7 @@ return {
                     -- This may be unwanted, since they displace some of your code
                     if
                         client
-                        and client_supports_method(
-                            client,
+                        and client:supports_method(
                             vim.lsp.protocol.Methods.textDocument_inlayHint,
                             event.buf
                         )
@@ -222,17 +206,6 @@ return {
                 },
             }
 
-            -- LSP servers and clients are able to communicate to each other what features they support.
-            --  By default, Neovim doesn't support everything that is in the LSP specification.
-            --  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
-            --  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
-            local capabilities = vim.lsp.protocol.make_client_capabilities()
-            capabilities = vim.tbl_deep_extend(
-                "force",
-                capabilities,
-                require("blink.cmp").get_lsp_capabilities()
-            )
-
             -- Check OS and arch
             local function isWindowsARM64()
                 local platform = string.lower(jit.os)
@@ -252,8 +225,6 @@ return {
             local servers = {
                 -- clangd = {},
                 -- gopls = {},
-                -- basedpyright = {},
-                -- ruff = {},
                 -- rust_analyzer = {},
 
                 -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
@@ -261,6 +232,26 @@ return {
                 -- Some languages (like typescript) have entire language plugins that can be useful:
                 --    https://github.com/pmizio/typescript-tools.nvim
             }
+            if not isWindowsARM64() then
+                vim.tbl_extend("force", servers, {
+                    lua_ls = {
+                        -- cmd = {...},
+                        -- filetypes = { ...},
+                        -- capabilities = {},
+                    },
+                    basedpyright = {},
+                    ruff = {},
+                    tailwindcss = {},
+                    taplo = {},
+                    astro = {},
+                    tinymist = {
+                        settings = {
+                            formatterMode = "typstyle",
+                            formatterPrintWidth = 80,
+                        },
+                    },
+                })
+            end
 
             -- Ensure the servers and tools above are installed
             --  To check the current status of installed tools and/or manually install
@@ -275,7 +266,7 @@ return {
             local ensure_installed = vim.tbl_keys(servers or {})
             if not isWindowsARM64() then
                 vim.list_extend(ensure_installed, {
-                    "stylua", -- Used to format Lua code
+                    "stylua",
                     "prettier",
                     "cspell",
                 })
@@ -290,24 +281,18 @@ return {
                 handlers = {
                     function(server_name)
                         local server = servers[server_name] or {}
-                        -- This handles overriding only values explicitly passed
-                        -- by the server configuration above. Useful when disabling
-                        -- certain features of an LSP (for example, turning off formatting for tsserver)
-                        server.capabilities = vim.tbl_deep_extend(
-                            "force",
-                            {},
-                            capabilities,
-                            server.capabilities or {}
-                        )
-                        require("lspconfig")[server_name].setup(server)
+                        -- passing config.capabilities to blink.cmp merges with the capabilities in your
+                        -- `opts[server].capabilities, if you've defined it
+                        server.capabilities =
+                            require("blink-cmp").get_lsp_capabilities(
+                                server.capabilities
+                            )
+                        lspconfig[server_name].setup(server)
                     end,
                 },
             }
 
-            require("lspconfig").lua_ls.setup {
-                -- cmd = {...},
-                -- filetypes = { ...},
-                -- capabilities = {},
+            lspconfig["lua_ls"].setup {
                 settings = {
                     Lua = {
                         completion = {
@@ -316,13 +301,6 @@ return {
                         -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
                         diagnostics = { disable = { "missing-fields" } },
                     },
-                },
-            }
-
-            require("lspconfig").tinymist.setup {
-                settings = {
-                    formatterMode = "typstyle",
-                    formatterPrintWidth = 80,
                 },
             }
         end,

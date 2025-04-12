@@ -3,10 +3,10 @@ return {
     event = "VeryLazy",
     dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
     opts = {
+        capabilities = require("blink-cmp").get_lsp_capabilities(),
         settings = {
             expose_as_code_action = "all",
         },
     },
     cond = not vim.g.vscode,
 }
-
