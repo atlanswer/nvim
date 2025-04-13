@@ -250,6 +250,7 @@ return {
                             formatterPrintWidth = 80,
                         },
                     },
+                    ts_ls = {},
                 })
             end
 
