@@ -21,8 +21,6 @@ return {
         },
         cond = not vim.g.vscode,
         config = function()
-            local lspconfig = require "lspconfig"
-
             vim.api.nvim_create_autocmd("LspAttach", {
                 group = vim.api.nvim_create_augroup(
                     "kickstart-lsp-attach",
@@ -39,55 +37,6 @@ return {
                         )
                     end
 
-                    -- Jump to the definition of the word under your cursor.
-                    --  This is where a variable was first declared, or where a function is defined, etc.
-                    --  To jump back, press <C-t>.
-                    map(
-                        "gd",
-                        require("telescope.builtin").lsp_definitions,
-                        "[G]oto [D]efinition"
-                    )
-
-                    -- Find references for the word under your cursor.
-                    map(
-                        "gr",
-                        require("telescope.builtin").lsp_references,
-                        "[G]oto [R]eferences"
-                    )
-
-                    -- Jump to the implementation of the word under your cursor.
-                    --  Useful when your language has ways of declaring types without an actual implementation.
-                    map(
-                        "gI",
-                        require("telescope.builtin").lsp_implementations,
-                        "[G]oto [I]mplementation"
-                    )
-
-                    -- Jump to the type of the word under your cursor.
-                    --  Useful when you're not sure what type a variable is and you want to see
-                    --  the definition of its *type*, not where it was *defined*.
-                    map(
-                        "<leader>D",
-                        require("telescope.builtin").lsp_type_definitions,
-                        "Type [D]efinition"
-                    )
-
-                    -- Fuzzy find all the symbols in your current document.
-                    --  Symbols are things like variables, functions, types, etc.
-                    map(
-                        "<leader>ds",
-                        require("telescope.builtin").lsp_document_symbols,
-                        "[D]ocument [S]ymbols"
-                    )
-
-                    -- Fuzzy find all the symbols in your current workspace.
-                    --  Similar to document symbols, except searches over your entire project.
-                    map(
-                        "<leader>ws",
-                        require("telescope.builtin").lsp_dynamic_workspace_symbols,
-                        "[W]orkspace [S]ymbols"
-                    )
-
                     -- Rename the variable under your cursor.
                     --  Most Language Servers support renaming across files, etc.
                     map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
@@ -100,9 +49,58 @@ return {
                         "[C]ode [A]ction"
                     )
 
+                    -- Find references for the word under your cursor.
+                    map(
+                        "gr",
+                        require("telescope.builtin").lsp_references,
+                        "[G]oto [R]eferences"
+                    )
+
+                    -- Jump to the implementation of the word under your cursor.
+                    --  Useful when your language has ways of declaring types without an actual implementation.
+                    map(
+                        "gi",
+                        require("telescope.builtin").lsp_implementations,
+                        "[G]oto [I]mplementation"
+                    )
+
+                    -- Jump to the definition of the word under your cursor.
+                    --  This is where a variable was first declared, or where a function is defined, etc.
+                    --  To jump back, press <C-t>.
+                    map(
+                        "gd",
+                        require("telescope.builtin").lsp_definitions,
+                        "[G]oto [D]efinition"
+                    )
+
                     -- This is not Goto Definition, this is Goto Declaration.
                     -- For example, in C this would take you to the header.
                     map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+
+                    -- Fuzzy find all the symbols in your current document.
+                    --  Symbols are things like variables, functions, types, etc.
+                    map(
+                        "gO",
+                        require("telescope.builtin").lsp_document_symbols,
+                        "Open Document Symbols"
+                    )
+
+                    -- Fuzzy find all the symbols in your current workspace.
+                    --  Similar to document symbols, except searches over your entire project.
+                    map(
+                        "gW",
+                        require("telescope.builtin").lsp_dynamic_workspace_symbols,
+                        "Open [W]orkspace Symbols"
+                    )
+
+                    -- Jump to the type of the word under your cursor.
+                    --  Useful when you're not sure what type a variable is and you want to see
+                    --  the definition of its *type*, not where it was *defined*.
+                    map(
+                        "grt",
+                        require("telescope.builtin").lsp_type_definitions,
+                        "[G]oto [T]ype Definition"
+                    )
 
                     -- The following two autocommands are used to highlight references of the
                     -- word under your cursor when your cursor rests there for a little while.
@@ -234,11 +232,7 @@ return {
             }
             if not isWindowsARM64() then
                 servers = vim.tbl_extend("force", servers, {
-                    lua_ls = {
-                        -- cmd = {...},
-                        -- filetypes = { ...},
-                        -- capabilities = {},
-                    },
+                    lua_ls = {},
                     basedpyright = {},
                     ruff = {},
                     tailwindcss = {},
@@ -254,16 +248,20 @@ return {
             end
 
             -- Ensure the servers and tools above are installed
-            --  To check the current status of installed tools and/or manually install
-            --  other tools, you can run
+            --
+            -- To check the current status of installed tools and/or manually install
+            -- other tools, you can run
             --    :Mason
             --
-            --  You can press `g?` for help in this menu.
-            require("mason").setup()
-
+            -- You can press `g?` for help in this menu.
+            --
+            -- `mason` had to be setup earlier: to configure its options see the
+            -- `dependencies` table for `nvim-lspconfig` above.
+            --
             -- You can add other tools here that you want Mason to install
             -- for you, so that they are available from within Neovim.
             local ensure_installed = vim.tbl_keys(servers or {})
+            vim.list_extend(ensure_installed, {})
             if not isWindowsARM64() then
                 vim.list_extend(ensure_installed, {
                     "stylua",
@@ -281,29 +279,32 @@ return {
                 handlers = {
                     function(server_name)
                         local server = servers[server_name] or {}
-                        -- passing config.capabilities to blink.cmp merges with the capabilities in your
-                        -- `opts[server].capabilities, if you've defined it
+                        -- This handles overriding only values explicitly passed
+                        -- by the server configuration above. Useful when disabling
+                        -- certain features of an LSP (for example, turning off formatting for ts_ls)
                         server.capabilities =
                             require("blink-cmp").get_lsp_capabilities(
                                 server.capabilities,
                                 true
                             )
-                        lspconfig[server_name].setup(server)
+                        vim.lsp.enable(server_name)
+                        vim.lsp.config(server_name, server)
                     end,
                 },
             }
 
-            lspconfig["lua_ls"].setup {
+            vim.lsp.enable "lua_ls"
+            vim.lsp.config("lua_ls", {
                 settings = {
                     Lua = {
-                        completion = {
-                            callSnippet = "Replace",
-                        },
+                        -- completion = {
+                        --     callSnippet = "Replace",
+                        -- },
                         -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
                         diagnostics = { disable = { "missing-fields" } },
                     },
                 },
-            }
+            })
         end,
     },
 }

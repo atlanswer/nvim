@@ -64,11 +64,6 @@ return {
                     },
                 },
             },
-            extensions = {
-                ["ui-select"] = {
-                    themes.get_dropdown(),
-                },
-            },
         }
 
         -- Enable telescope extensions, if they are installed
