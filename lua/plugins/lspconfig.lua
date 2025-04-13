@@ -284,8 +284,7 @@ return {
                         -- certain features of an LSP (for example, turning off formatting for ts_ls)
                         server.capabilities =
                             require("blink-cmp").get_lsp_capabilities(
-                                server.capabilities,
-                                true
+                                server.capabilities
                             )
                         vim.lsp.enable(server_name)
                         vim.lsp.config(server_name, server)

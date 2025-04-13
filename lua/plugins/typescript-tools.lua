@@ -7,7 +7,7 @@ return {
         "saghen/blink.cmp",
     },
     opts = {
-        capabilities = require("blink-cmp").get_lsp_capabilities(nil, true),
+        capabilities = require("blink-cmp").get_lsp_capabilities(),
         settings = {
             expose_as_code_action = "all",
         },
