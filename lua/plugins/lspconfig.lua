@@ -285,7 +285,8 @@ return {
                         -- `opts[server].capabilities, if you've defined it
                         server.capabilities =
                             require("blink-cmp").get_lsp_capabilities(
-                                server.capabilities
+                                server.capabilities,
+                                true
                             )
                         lspconfig[server_name].setup(server)
                     end,

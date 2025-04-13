@@ -3,6 +3,7 @@ return {
     -- optional: provides snippets for the snippet source
     dependencies = {
         "rafamadriz/friendly-snippets",
+        "echasnovski/mini.nvim",
     },
 
     -- use a release tag to download pre-built binaries
@@ -36,45 +37,64 @@ return {
         },
 
         completion = {
-            menu = {
-                draw = {
-                    treesitter = { "lsp" },
-                    components = {
-                        kind_icon = {
-                            text = function(ctx)
-                                local kind_icon, _, _ =
-                                    require("mini.icons").get("lsp", ctx.kind)
-                                return kind_icon
-                            end,
-                            -- (optional) use highlights from mini.icons
-                            highlight = function(ctx)
-                                local _, hl, _ =
-                                    require("mini.icons").get("lsp", ctx.kind)
-                                return hl
-                            end,
-                        },
-                        kind = {
-                            -- (optional) use highlights from mini.icons
-                            highlight = function(ctx)
-                                local _, hl, _ =
-                                    require("mini.icons").get("lsp", ctx.kind)
-                                return hl
-                            end,
-                        },
-                    },
-                },
-            },
-            keyword = { range = "full" },
-            ghost_text = { enabled = true },
             list = {
                 selection = { preselect = true, auto_insert = false },
             },
+            menu = {
+                draw = {
+                    columns = { { "kind_icon", "label" }, { "kind" } },
+                    components = {
+                        label = {
+                            width = { fill = true, min = 10 },
+                            text = function(ctx)
+                                return require("colorful-menu").blink_components_text(
+                                    ctx
+                                )
+                            end,
+                            highlight = function(ctx)
+                                return require("colorful-menu").blink_components_highlight(
+                                    ctx
+                                )
+                            end,
+                        },
+                        -- kind_icon = {
+                        --     text = function(ctx)
+                        --         local kind_icon, _, _ =
+                        --             require("mini.icons").get("lsp", ctx.kind)
+                        --         return kind_icon
+                        --     end,
+                        --     -- (optional) use highlights from mini.icons
+                        --     highlight = function(ctx)
+                        --         local _, hl, _ =
+                        --             require("mini.icons").get("lsp", ctx.kind)
+                        --         return hl
+                        --     end,
+                        -- },
+                        -- kind = {
+                        --     -- (optional) use highlights from mini.icons
+                        --     highlight = function(ctx)
+                        --         local _, hl, _ =
+                        --             require("mini.icons").get("lsp", ctx.kind)
+                        --         return hl
+                        --     end,
+                        -- },
+                    },
+                },
+            },
+            ghost_text = { enabled = true },
         },
 
         -- Default list of enabled providers defined so that you can extend it
         -- elsewhere in your config, without redefining it, due to `opts_extend`
         sources = {
-            default = { "lsp", "path", "snippets", "buffer", "lazydev" },
+            default = {
+                "lsp",
+                "path",
+                "snippets",
+                "lazydev",
+                "omni",
+                "buffer",
+            },
             -- optionally disable cmdline completions
             -- cmdline = {},
             providers = {

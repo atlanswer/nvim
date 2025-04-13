@@ -8,7 +8,6 @@ return { -- Collection of various small independent plugins/modules
 
         local statusline = require "mini.statusline"
         statusline.setup()
-
         -- You can configure sections in the statusline by overriding their
         -- default behavior. For example, here we disable the section for
         -- cursor information because line numbers are already enabled
@@ -18,9 +17,8 @@ return { -- Collection of various small independent plugins/modules
             if MiniStatusline.is_truncated(args.trunc_width) then
                 return "%l:%-v/%L"
             end
-
             -- Use `virtcol()` to correctly handle multi-byte characters
-            return '%l:%-v / %L:%-2{virtcol("$") - 1}'
+            return '%2l:%-v / %L:%-2{virtcol("$") - 1}'
         end
 
         require("mini.tabline").setup()

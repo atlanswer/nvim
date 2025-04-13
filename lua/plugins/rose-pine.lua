@@ -10,7 +10,14 @@ return {
         },
         highlight_groups = {
             EndOfBuffer = { fg = "base" },
+            BlinkCmpMenuSelection = { bg = "overlay", inherit = false },
+            BlinkCmpLabelMatch = {
+                bold = true,
+                cterm = {
+                    bold = true,
+                },
+                inherit = false,
+            },
         },
     },
 }
-

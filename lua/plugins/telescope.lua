@@ -5,11 +5,16 @@ return {
     dependencies = {
         "nvim-lua/plenary.nvim",
         "nvim-telescope/telescope-ui-select.nvim",
+        "nvim-telescope/telescope-frecency.nvim",
     },
     cond = not vim.g.vscode,
     config = function()
-        local actions = require "telescope.actions"
+        local telescope = require "telescope"
         local telescipeConfig = require "telescope.config"
+        local themes = require "telescope.themes"
+        local actions = require "telescope.actions"
+        local layout = require "telescope.actions.layout"
+        local layout_strategies = require "telescope.pickers.layout_strategies"
 
         local vimgrep_arguments =
             { unpack(telescipeConfig.values.vimgrep_arguments) }
@@ -17,12 +22,26 @@ return {
         table.insert(vimgrep_arguments, "--glob")
         table.insert(vimgrep_arguments, "!**/.git/*")
 
-        require("telescope").setup {
+        telescope.setup {
             defaults = {
+                layout_strategy = "flex",
+                layout_config = {
+                    flip_columns = 120,
+                    flip_lines = 0,
+                    horizontal = {
+                        preview_cutoff = 120,
+                    },
+                    vertical = {
+                        preview_cutoff = 20,
+                    },
+                },
                 vimgrep_arguments = vimgrep_arguments,
                 mappings = {
                     i = {
                         ["<esc>"] = actions.close,
+                        ["<C-l>"] = layout.toggle_preview,
+                        ["<C-h>"] = actions.select_horizontal,
+                        ["<C-j>"] = actions.select_vertical,
                     },
                 },
             },
@@ -47,15 +66,15 @@ return {
             },
             extensions = {
                 ["ui-select"] = {
-                    require("telescope.themes").get_dropdown(),
+                    themes.get_dropdown(),
                 },
             },
         }
 
         -- Enable telescope extensions, if they are installed
-        pcall(require("telescope").load_extension, "fzf")
-        pcall(require("telescope").load_extension, "ui-select")
-        pcall(require("telescope").load_extension, "notify")
+        telescope.load_extension "ui-select"
+        telescope.load_extension "notify"
+        telescope.load_extension "frecency"
 
         -- See `:help telescope.builtin`
         local builtin = require "telescope.builtin"
