@@ -233,7 +233,7 @@ return {
                 --    https://github.com/pmizio/typescript-tools.nvim
             }
             if not isWindowsARM64() then
-                vim.tbl_extend("force", servers, {
+                servers = vim.tbl_extend("force", servers, {
                     lua_ls = {
                         -- cmd = {...},
                         -- filetypes = { ...},
@@ -250,7 +250,6 @@ return {
                             formatterPrintWidth = 80,
                         },
                     },
-                    ts_ls = {},
                 })
             end
 
