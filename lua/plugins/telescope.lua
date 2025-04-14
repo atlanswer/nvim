@@ -24,10 +24,10 @@ return {
             defaults = {
                 layout_strategy = "flex",
                 layout_config = {
-                    flip_columns = 120,
+                    flip_columns = 140,
                     flip_lines = 0,
                     horizontal = {
-                        preview_cutoff = 120,
+                        preview_cutoff = 140,
                     },
                     vertical = {
                         preview_cutoff = 20,

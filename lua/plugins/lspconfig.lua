@@ -267,6 +267,7 @@ return {
                     "stylua",
                     "prettier",
                     "cspell",
+                    "eslint_d",
                 })
             end
             require("mason-tool-installer").setup {
