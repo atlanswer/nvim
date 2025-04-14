@@ -11,10 +11,8 @@ return {
     config = function()
         local telescope = require "telescope"
         local telescipeConfig = require "telescope.config"
-        local themes = require "telescope.themes"
         local actions = require "telescope.actions"
         local layout = require "telescope.actions.layout"
-        local layout_strategies = require "telescope.pickers.layout_strategies"
 
         local vimgrep_arguments =
             { unpack(telescipeConfig.values.vimgrep_arguments) }
@@ -145,11 +143,12 @@ return {
             builtin.buffers,
             { desc = "[ ] Find existing buffers" }
         )
-        vim.keymap.set("n", "<leader>/", function()
-            builtin.current_buffer_fuzzy_find(
-                require("telescope.themes").get_dropdown { previewer = false }
-            )
-        end, { desc = "[/] Fuzzily search in current buffer" })
+        vim.keymap.set(
+            "n",
+            "<leader>/",
+            builtin.current_buffer_fuzzy_find,
+            { desc = "[/] Fuzzily search in current buffer" }
+        )
         vim.keymap.set("n", "<leader>sn", function()
             builtin.find_files { cwd = vim.fn.stdpath "config" }
         end, { desc = "[S]earch [N]eovim files" })

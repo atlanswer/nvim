@@ -119,7 +119,7 @@ if not vim.g.vscode then
     vim.keymap.set(
         "n",
         "-",
-        require("oil").open_float,
+        require("oil").open,
         { desc = "(Oil) Open parent directory" }
     )
 end
@@ -153,4 +153,3 @@ vim.keymap.set(
     "<C-\\><C-n>",
     { desc = "Exit terminal mode" }
 )
-
