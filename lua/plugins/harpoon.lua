@@ -6,14 +6,27 @@ return {
     cond = not vim.g.vscode,
     config = function()
         local harpoon = require "harpoon"
-        harpoon:setup()
+        local harpoon_extensions = require "harpoon.extensions"
+
+        harpoon:setup {
+            settings = {
+                sync_on_ui_close = true,
+                key = function()
+                    return vim.uv.cwd() or ""
+                end,
+            },
+        }
+
+        harpoon:extend(harpoon_extensions.builtins.highlight_current_file())
 
         vim.keymap.set("n", "<leader>a", function()
             harpoon:list():add()
         end, { desc = "[A]dd to harpoon list" })
-        vim.keymap.set("n", "<C-e>", function()
-            harpoon.ui:toggle_quick_menu(harpoon:list())
-        end, { desc = "Toggle harpoon quick menu" })
+        vim.keymap.set("n", "<leader>h", function()
+            harpoon.ui:toggle_quick_menu(harpoon:list(), {
+                height_in_lines = 16,
+            })
+        end, { desc = "Toggle [H]arpoon quick menu" })
         vim.keymap.set("n", "gh", function()
             harpoon:list():next { ui_nav_wrap = true }
         end, { desc = "Harpoon next" })
