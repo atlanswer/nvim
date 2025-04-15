@@ -33,7 +33,9 @@ return {
         -- C-k: Toggle signature help (if signature.enabled = true)
         --
         -- See :h blink-cmp-config-keymap for defining your own keymap
-        keymap = { preset = "super-tab" },
+        keymap = {
+            preset = "super-tab",
+        },
 
         appearance = {
             -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
@@ -47,10 +49,13 @@ return {
             },
             -- By default, you may press `<c-space>` to show the documentation.
             -- Optionally, set `auto_show = true` to show the documentation after a delay.
-            documentation = { auto_show = false, auto_show_delay_ms = 500 },
+            documentation = { auto_show = true, auto_show_delay_ms = 500 },
             menu = {
                 draw = {
-                    columns = { { "kind_icon", "label" }, { "kind" } },
+                    columns = {
+                        { "kind_icon", "label" },
+                        { "kind", "source_name", gap = 1 },
+                    },
                     components = {
                         label = {
                             width = { fill = true, min = 10 },
