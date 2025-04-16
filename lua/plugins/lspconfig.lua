@@ -240,6 +240,11 @@ return {
                             formatterPrintWidth = 80,
                         },
                     },
+                    -- kotlin_language_server = {
+                    --     init_options = {
+                    --         storagePath = vim.fn.stdpath "data",
+                    --     },
+                    -- },
                 })
             end
 

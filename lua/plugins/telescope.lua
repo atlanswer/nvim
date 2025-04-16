@@ -38,8 +38,8 @@ return {
                     i = {
                         ["<esc>"] = actions.close,
                         ["<C-l>"] = layout.toggle_preview,
-                        ["<C-h>"] = actions.select_horizontal,
-                        ["<C-j>"] = actions.select_vertical,
+                        ["<A-h>"] = actions.select_horizontal,
+                        ["<A-j>"] = actions.select_vertical,
                     },
                 },
             },

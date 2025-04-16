@@ -19,12 +19,12 @@ return {
                 .. "'^' . escape($HOME, '\\'), '~', '')}",
         },
         keymaps = {
-            ["<C-x>"] = {
+            ["<A-h>"] = {
                 "actions.select",
                 opts = { horizontal = true },
                 desc = "Open in horizontal split",
             },
-            ["<C-v>"] = {
+            ["<A-j>"] = {
                 "actions.select",
                 opts = { vertical = true },
                 desc = "Open in vertical split",

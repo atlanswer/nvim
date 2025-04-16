@@ -10,6 +10,7 @@ return {
 
         harpoon:setup {
             settings = {
+                save_on_toggle = true,
                 sync_on_ui_close = true,
                 key = function()
                     return vim.uv.cwd() or ""
@@ -18,6 +19,11 @@ return {
         }
 
         harpoon:extend(harpoon_extensions.builtins.highlight_current_file())
+        harpoon:extend {
+            SELECT = function(ctx)
+                harpoon:list()._index = ctx.idx
+            end,
+        }
 
         vim.keymap.set("n", "<leader>a", function()
             harpoon:list():add()
@@ -27,10 +33,10 @@ return {
                 height_in_lines = 16,
             })
         end, { desc = "Toggle [H]arpoon quick menu" })
-        vim.keymap.set("n", "gh", function()
+        vim.keymap.set("n", "gj", function()
             harpoon:list():next { ui_nav_wrap = true }
         end, { desc = "Harpoon next" })
-        vim.keymap.set("n", "gy", function()
+        vim.keymap.set("n", "gk", function()
             harpoon:list():prev { ui_nav_wrap = true }
         end, { desc = "Harpoon previous" })
         vim.keymap.set("n", "g1", function()

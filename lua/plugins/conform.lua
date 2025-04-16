@@ -31,6 +31,7 @@ return {
             markdown = { "prettier" },
             astro = { "prettier" },
             toml = { "taplo" },
+            kotlin = { "ktfmt" },
         },
     },
     init = function()
