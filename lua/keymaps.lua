@@ -11,18 +11,18 @@ vim.keymap.set(
     "<cmd>execute 'move .-' . (v:count1 + 1)<cr>==",
     { desc = "Move line up" }
 )
-vim.keymap.set(
-    "i",
-    "<A-j>",
-    "<esc><cmd>m .+1<cr>==gi",
-    { desc = "Move line down" }
-)
-vim.keymap.set(
-    "i",
-    "<A-k>",
-    "<esc><cmd>m .-2<cr>==gi",
-    { desc = "Move line up" }
-)
+-- vim.keymap.set(
+--     "i",
+--     "<A-j>",
+--     "<esc><cmd>m .+1<cr>==gi",
+--     { desc = "Move line down" }
+-- )
+-- vim.keymap.set(
+--     "i",
+--     "<A-k>",
+--     "<esc><cmd>m .-2<cr>==gi",
+--     { desc = "Move line up" }
+-- )
 vim.keymap.set(
     "v",
     "<A-j>",

@@ -33,22 +33,22 @@ return {
                 height_in_lines = 16,
             })
         end, { desc = "Toggle [H]arpoon quick menu" })
-        vim.keymap.set("n", "gj", function()
+        vim.keymap.set("n", "fj", function()
             harpoon:list():next { ui_nav_wrap = true }
         end, { desc = "Harpoon next" })
-        vim.keymap.set("n", "gk", function()
+        vim.keymap.set("n", "fk", function()
             harpoon:list():prev { ui_nav_wrap = true }
         end, { desc = "Harpoon previous" })
-        vim.keymap.set("n", "g1", function()
+        vim.keymap.set("n", "f1", function()
             harpoon:list():select(1)
         end, { desc = "Harpoon select file 1" })
-        vim.keymap.set("n", "g2", function()
+        vim.keymap.set("n", "f2", function()
             harpoon:list():select(2)
         end, { desc = "Harpoon select file 2" })
-        vim.keymap.set("n", "g3", function()
+        vim.keymap.set("n", "f3", function()
             harpoon:list():select(3)
         end, { desc = "Harpoon select file 3" })
-        vim.keymap.set("n", "g4", function()
+        vim.keymap.set("n", "f4", function()
             harpoon:list():select(4)
         end, { desc = "Harpoon select file 4" })
     end,
