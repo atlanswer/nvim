@@ -20,7 +20,7 @@ vim.opt.confirm = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
-vim.opt.cursorline = false
+vim.opt.cursorline = true
 
 vim.opt.signcolumn = "yes"
 vim.opt.colorcolumn = "81"
@@ -53,10 +53,11 @@ vim.opt.hlsearch = true
 
 vim.opt.termguicolors = true
 vim.opt.guicursor = "a:Cursor/lCursor,\z
-                     n-v-c:block-Cursor/nCursor,\z
-                     i-ci-ve:ver25-iCursor-blinkwait0-blinkoff300-blinkon300,\z
+                     n-v-c:block,\z
+                     i-ci-ve:ver25-blinkwait0-blinkoff500-blinkon500,\z
                      r-cr-o:hor20,\z
-                     sm:blinkwait0-blinkoff300-blinkon300"
+                     sm:blinkwait0-blinkoff500-blinkon500,\z
+                     t:TermCursor"
 
 
 -- Fold

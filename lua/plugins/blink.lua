@@ -35,6 +35,19 @@ return {
         -- See :h blink-cmp-config-keymap for defining your own keymap
         keymap = {
             preset = "super-tab",
+            ["<C-Space>"] = {
+                function()
+                    vim.api.nvim_echo({ { "<C-Space> received" } }, false, {})
+                end,
+                "show",
+                "show_documentation",
+                "hide_documentation",
+            },
+            ["<C-o>"] = {
+                "show",
+                "show_documentation",
+                "hide_documentation",
+            },
         },
 
         appearance = {
@@ -47,11 +60,7 @@ return {
             list = {
                 selection = { preselect = true, auto_insert = false },
             },
-            -- By default, you may press `<c-space>` to show the documentation.
-            -- Optionally, set `auto_show = true` to show the documentation after a delay.
             documentation = {
-                auto_show = true,
-                auto_show_delay_ms = 500,
                 window = {
                     border = "rounded",
                 },
