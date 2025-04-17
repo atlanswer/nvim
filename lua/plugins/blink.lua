@@ -49,8 +49,15 @@ return {
             },
             -- By default, you may press `<c-space>` to show the documentation.
             -- Optionally, set `auto_show = true` to show the documentation after a delay.
-            documentation = { auto_show = true, auto_show_delay_ms = 500 },
+            documentation = {
+                auto_show = true,
+                auto_show_delay_ms = 500,
+                window = {
+                    border = "rounded",
+                },
+            },
             menu = {
+                border = "rounded",
                 draw = {
                     columns = {
                         { "kind_icon", "label" },
@@ -122,7 +129,7 @@ return {
         snippets = { preset = "luasnip" },
 
         -- experimental signature help support
-        signature = { enabled = true },
+        signature = { enabled = true, window = { border = "rounded" } },
 
         -- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
         -- You may use a lua implementation instead by using `implementation = "lua"` or fallback to the lua implementation,

@@ -16,7 +16,16 @@ return {
             { "williamboman/mason.nvim", opts = {} },
             "williamboman/mason-lspconfig.nvim",
             "WhoIsSethDaniel/mason-tool-installer.nvim",
-            { "j-hui/fidget.nvim", opts = {} },
+            {
+                "j-hui/fidget.nvim",
+                opts = {
+                    notification = {
+                        window = {
+                            winblend = 0,
+                        },
+                    },
+                },
+            },
             "saghen/blink.cmp",
         },
         cond = not vim.g.vscode,
@@ -97,6 +106,26 @@ return {
                         require("telescope.builtin").lsp_type_definitions,
                         "[G]oto [T]ype Definition"
                     )
+
+                    -- Change floating preview window
+                    local orig_util_open_floating_preview =
+                        vim.lsp.util.open_floating_preview
+                    ---@diagnostic disable-next-line: duplicate-set-field
+                    function vim.lsp.util.open_floating_preview(
+                        contents,
+                        syntax,
+                        opts,
+                        ...
+                    )
+                        opts = opts or {}
+                        opts.border = opts.border or "rounded"
+                        return orig_util_open_floating_preview(
+                            contents,
+                            syntax,
+                            opts,
+                            ...
+                        )
+                    end
 
                     -- The following two autocommands are used to highlight references of the
                     -- word under your cursor when your cursor rests there for a little while.

@@ -20,12 +20,12 @@ vim.opt.confirm = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
-vim.opt.cursorline = true
+vim.opt.cursorline = false
 
 vim.opt.signcolumn = "yes"
 vim.opt.colorcolumn = "81"
 
-vim.opt.updatetime = 500
+vim.opt.updatetime = 300
 vim.opt.timeoutlen = 1000
 
 vim.opt.splitright = true
@@ -52,11 +52,12 @@ vim.opt.scrolloff = 10
 vim.opt.hlsearch = true
 
 vim.opt.termguicolors = true
-vim.opt.guicursor = "n-v-c:block-Cursor,\z
-                     i-ci-ve:ver50-iCursor-\z
-                     blinkwait700-blinkoff300-blinkon300,\z
-                     r-cr:hor20,o:hor50,\z
-                     sm:blinkwait500-blinkoff300-blinkon200"
+vim.opt.guicursor = "a:Cursor/lCursor,\z
+                     n-v-c:block-Cursor/nCursor,\z
+                     i-ci-ve:ver25-iCursor-blinkwait0-blinkoff300-blinkon300,\z
+                     r-cr-o:hor20,\z
+                     sm:blinkwait0-blinkoff300-blinkon300"
+
 
 -- Fold
 vim.opt.foldmethod = "expr"
@@ -132,7 +133,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup "plugins"
 
-vim.cmd.colorscheme "rose-pine"
+vim.cmd.colorscheme "catppuccin"
 
 -- Key mappings
 require "keymaps"
