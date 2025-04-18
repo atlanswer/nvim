@@ -19,6 +19,7 @@ return {
                 .. "'^' . escape($HOME, '\\'), '~', '')}",
         },
         keymaps = {
+            ["<C-h>"] = false,
             ["<A-h>"] = {
                 "actions.select",
                 opts = { horizontal = true },
@@ -29,6 +30,9 @@ return {
                 opts = { vertical = true },
                 desc = "Open in vertical split",
             },
+            ["<C-l>"] = false,
+            ["<A-p>"] = { "actions.preview" },
+            ["<A-l>"] = { "actions.refresh" },
             ["<leader>sf"] = {
                 function()
                     require("telescope.builtin").find_files {
