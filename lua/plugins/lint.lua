@@ -6,6 +6,7 @@ return {
         lint.linters_by_ft = {
             javascript = { "eslint_d" },
             typescript = { "eslint_d" },
+            kotlin = { "ktlint" },
         }
 
         local lint_augroup =
