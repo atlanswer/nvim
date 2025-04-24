@@ -317,13 +317,14 @@ return {
                             require("blink-cmp").get_lsp_capabilities(
                                 server.capabilities
                             )
-                        require("lspconfig")[server_name].setup(server)
-                        -- vim.lsp.enable(server_name)
+                        -- require("lspconfig")[server_name].setup(server)
+                        vim.lsp.config(server_name, server)
+                        vim.lsp.enable(server_name)
                     end,
                 },
             }
 
-            require("lspconfig")["lua_ls"].setup {
+            vim.lsp.config("lua_ls", {
                 settings = {
                     Lua = {
                         completion = {
@@ -333,8 +334,8 @@ return {
                         diagnostics = { disable = { "missing-fields" } },
                     },
                 },
-            }
-            -- vim.lsp.enable "lua_ls"
+            })
+            vim.lsp.enable "lua_ls"
         end,
     },
 }
