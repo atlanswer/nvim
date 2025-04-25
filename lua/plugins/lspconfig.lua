@@ -16,16 +16,16 @@ return {
             { "williamboman/mason.nvim", opts = {} },
             "williamboman/mason-lspconfig.nvim",
             "WhoIsSethDaniel/mason-tool-installer.nvim",
-            {
-                "j-hui/fidget.nvim",
-                opts = {
-                    notification = {
-                        window = {
-                            winblend = 0,
-                        },
-                    },
-                },
-            },
+            -- {
+            --     "j-hui/fidget.nvim",
+            --     opts = {
+            --         notification = {
+            --             window = {
+            --                 winblend = 0,
+            --             },
+            --         },
+            --     },
+            -- },
             "saghen/blink.cmp",
         },
         cond = not vim.g.vscode,

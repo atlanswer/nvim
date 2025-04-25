@@ -66,7 +66,7 @@ return {
 
         -- Enable telescope extensions, if they are installed
         telescope.load_extension "ui-select"
-        telescope.load_extension "notify"
+        -- telescope.load_extension "notify"
         telescope.load_extension "frecency"
 
         -- See `:help telescope.builtin`

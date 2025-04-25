@@ -29,5 +29,11 @@ return { -- Collection of various small independent plugins/modules
 
         require("mini.tabline").setup()
         vim.o.showtabline = 1
+
+        require("mini.comment").setup {
+            options = {
+                ignore_blank_line = true,
+            },
+        }
     end,
 }

@@ -30,6 +30,6 @@ return {
             return vim.lsp.handlers.hover(_, result, ctx, config)
         end
     end,
-    cond = not vim.g.vscode,
+    cond = false,
 }
 
