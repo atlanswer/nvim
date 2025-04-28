@@ -6,4 +6,5 @@ return {
         wpm_goal = 60,
     },
     cmd = { "Typr", "TyprStats" },
+    cond = not vim.g.vscode,
 }

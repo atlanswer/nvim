@@ -254,12 +254,12 @@ return {
                 --
                 -- Some languages (like typescript) have entire language plugins that can be useful:
                 --    https://github.com/pmizio/typescript-tools.nvim
+                basedpyright = {},
+                ruff = {},
             }
             if not isWindowsARM64() then
                 servers = vim.tbl_extend("force", servers, {
                     lua_ls = {},
-                    basedpyright = {},
-                    ruff = {},
                     tailwindcss = {},
                     taplo = {},
                     astro = {},
@@ -291,7 +291,9 @@ return {
             -- You can add other tools here that you want Mason to install
             -- for you, so that they are available from within Neovim.
             local ensure_installed = vim.tbl_keys(servers or {})
-            vim.list_extend(ensure_installed, {})
+            vim.list_extend(ensure_installed, {
+                "pyproject-fmt",
+            })
             if not isWindowsARM64() then
                 vim.list_extend(ensure_installed, {
                     "stylua",

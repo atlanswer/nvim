@@ -1,6 +1,7 @@
 return {
     "lewis6991/gitsigns.nvim",
     event = "VeryLazy",
+    cond = not vim.g.vscode,
     config = function()
         require("gitsigns").setup {
             current_line_blame = true,
@@ -97,5 +98,4 @@ return {
             end,
         }
     end,
-    cond = not vim.g.vscode,
 }

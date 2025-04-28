@@ -1,7 +1,7 @@
 return {
     "stevearc/oil.nvim",
     dependencies = { { "echasnovski/mini.nvim", opts = {} } },
-
+    cond = not vim.g.vscode,
     ---@module "oil"
     ---@type oil.SetupOpts
     opts = {
@@ -63,5 +63,4 @@ return {
             { desc = "(Oil) Open parent directory" }
         )
     end,
-    cond = not vim.g.vscode,
 }

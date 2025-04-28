@@ -59,7 +59,6 @@ vim.opt.guicursor = "a:Cursor/lCursor,\z
                      sm:blinkwait0-blinkoff500-blinkon500,\z
                      t:TermCursor"
 
-
 -- Fold
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
@@ -134,7 +133,9 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup "plugins"
 
-vim.cmd.colorscheme "catppuccin"
+if not vim.g.vscode then
+    vim.cmd.colorscheme "catppuccin"
+end
 
 -- Key mappings
 require "keymaps"

@@ -33,5 +33,5 @@ return {
         },
         highlights = {},
     },
+    cond = false,
 }
-

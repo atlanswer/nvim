@@ -1,5 +1,6 @@
 return {
     "folke/snacks.nvim",
+    cond = not vim.g.vscode,
     ---@type snacks.Config
     opts = {
         notifier = { style = "fancy" },

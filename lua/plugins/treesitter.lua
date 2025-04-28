@@ -5,7 +5,6 @@ return {
     main = "nvim-treesitter.configs",
     opts = {
         ensure_installed = {
-            "bash",
             "diff",
             "lua",
             "luadoc",
@@ -17,7 +16,6 @@ return {
             "html",
             "javascript",
             "typescript",
-            "tsx",
         },
         -- Autoinstall languages that are not installed
         auto_install = true,
@@ -42,4 +40,3 @@ return {
     },
     cond = not vim.g.vscode,
 }
-

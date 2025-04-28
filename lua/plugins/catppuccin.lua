@@ -1,6 +1,7 @@
 return {
     "catppuccin/nvim",
     name = "catppuccin",
+    cond = not vim.g.vscode,
     opts = {
         term_colors = true,
         transparent_background = false,
