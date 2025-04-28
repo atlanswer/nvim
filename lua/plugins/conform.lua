@@ -30,7 +30,7 @@ return {
             css = { "prettier" },
             markdown = { "prettier" },
             astro = { "prettier" },
-            toml = { "taplo" },
+            toml = { "taplo", "pyproject-fmt" },
             kotlin = { "ktlint" },
         },
     },

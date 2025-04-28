@@ -55,5 +55,13 @@ return {
             },
         },
     },
+    init = function()
+        vim.keymap.set(
+            "n",
+            "-",
+            require("oil").open,
+            { desc = "(Oil) Open parent directory" }
+        )
+    end,
     cond = not vim.g.vscode,
 }

@@ -36,7 +36,7 @@ vim.keymap.set(
     { desc = "Move selection up" }
 )
 
--- Page
+-- Window scroll
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 
@@ -114,16 +114,6 @@ vim.keymap.set("n", "<leader>Y", '"+Y')
 vim.keymap.set("n", "<leader>d", '"_d', { desc = "Delete into void" })
 vim.keymap.set("v", "<leader>d", '"_d')
 
--- Oil file explorer
-if not vim.g.vscode then
-    vim.keymap.set(
-        "n",
-        "-",
-        require("oil").open,
-        { desc = "(Oil) Open parent directory" }
-    )
-end
-
 -- Search
 vim.keymap.set(
     { "i", "n" },
@@ -143,7 +133,7 @@ vim.keymap.set(
     { desc = "Open diagnostic [Q]uickfix list" }
 )
 
--- Exit
+-- Exit terminal mode
 vim.keymap.set(
     "t",
     "<Esc><Esc>",
