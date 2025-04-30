@@ -38,5 +38,4 @@ return {
         },
         indent = { enable = true, disable = { "ruby" } },
     },
-    cond = not vim.g.vscode,
 }
