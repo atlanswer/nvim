@@ -18,7 +18,7 @@ return {
             "typescript",
         },
         -- Autoinstall languages that are not installed
-        auto_install = true,
+        auto_install = false,
         highlight = {
             enable = true,
             -- NOTE: these are the names of the parsers and not the filetype.
