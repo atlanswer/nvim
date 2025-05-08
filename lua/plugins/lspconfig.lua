@@ -13,19 +13,9 @@ return {
     { -- Main LSP Configuration
         "neovim/nvim-lspconfig",
         dependencies = {
-            { "williamboman/mason.nvim", opts = {} },
-            "williamboman/mason-lspconfig.nvim",
+            { "mason-org/mason.nvim", opts = {} },
+            "mason-org/mason-lspconfig.nvim",
             "WhoIsSethDaniel/mason-tool-installer.nvim",
-            -- {
-            --     "j-hui/fidget.nvim",
-            --     opts = {
-            --         notification = {
-            --             window = {
-            --                 winblend = 0,
-            --             },
-            --         },
-            --     },
-            -- },
             "saghen/blink.cmp",
         },
         cond = not vim.g.vscode,
@@ -305,26 +295,16 @@ return {
             require("mason-tool-installer").setup {
                 ensure_installed = ensure_installed,
             }
-
             require("mason-lspconfig").setup {
                 ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
-                automatic_installation = false,
-                handlers = {
-                    function(server_name)
-                        local server = servers[server_name] or {}
-                        -- This handles overriding only values explicitly passed
-                        -- by the server configuration above. Useful when disabling
-                        -- certain features of an LSP (for example, turning off formatting for ts_ls)
-                        server.capabilities =
-                            require("blink-cmp").get_lsp_capabilities(
-                                server.capabilities
-                            )
-                        -- require("lspconfig")[server_name].setup(server)
-                        vim.lsp.config(server_name, server)
-                        vim.lsp.enable(server_name)
-                    end,
-                },
             }
+
+            for server_name, server in pairs(servers) do
+                server.capabilities = require("blink-cmp").get_lsp_capabilities(
+                    server.capabilities
+                )
+                vim.lsp.config(server_name, server)
+            end
 
             vim.lsp.config("lua_ls", {
                 settings = {
