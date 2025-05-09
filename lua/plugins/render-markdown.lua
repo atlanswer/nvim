@@ -4,6 +4,7 @@ return {
         "nvim-treesitter/nvim-treesitter",
         "echasnovski/mini.nvim",
     },
+    event = "VeryLazy",
     ---@module 'render-markdown'
     ---@type render.md.UserConfig
     opts = {
