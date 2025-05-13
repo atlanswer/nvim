@@ -32,6 +32,13 @@ return {
                 end, { desc = "Move to previous hunk" })
 
                 -- Actions
+                -- visual mode
+                map("v", "<leader>hs", function()
+                    gitsigns.stage_hunk { vim.fn.line ".", vim.fn.line "v" }
+                end, { desc = "Git [s]tage hunk" })
+                map("v", "<leader>hr", function()
+                    gitsigns.reset_hunk { vim.fn.line ".", vim.fn.line "v" }
+                end, { desc = "Git [r]eset hunk" })
                 -- map(
                 --     "n",
                 --     "<leader>hs",
@@ -92,7 +99,12 @@ return {
                 map("n", "<leader>gD", function()
                     gitsigns.diffthis "~"
                 end, { desc = "[G]it [D]iff this against ~" })
-
+                map(
+                    "n",
+                    "<leader>tD",
+                    gitsigns.preview_hunk_inline,
+                    { desc = "Git [T]oggle show [D]eleted" }
+                )
                 -- Text object
                 map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
             end,

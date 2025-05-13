@@ -2,21 +2,30 @@ return {
     "saghen/blink.cmp",
     -- optional: provides snippets for the snippet source
     dependencies = {
-        { "L3MON4D3/LuaSnip", version = "v2.*" },
-        "rafamadriz/friendly-snippets",
+        {
+            "L3MON4D3/LuaSnip",
+            version = "v2.*",
+            opts = {},
+            dependencies = {
+                {
+                    "rafamadriz/friendly-snippets",
+                    config = function()
+                        require("luasnip.loaders.from_vscode").lazy_load()
+                    end,
+                },
+            },
+        },
         "folke/lazydev.nvim",
         "echasnovski/mini.nvim",
     },
-
+    event = "VimEnter",
+    cond = not vim.g.vscode,
     -- use a release tag to download pre-built binaries
     version = "1.*",
     -- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
     -- build = 'cargo build --release',
     -- If you use nix, you can build from source using latest nightly rust with:
     -- build = 'nix run .#build-plugin',
-
-    event = "VimEnter",
-    cond = not vim.g.vscode,
 
     ---@module "blink.cmp"
     ---@type blink.cmp.Config

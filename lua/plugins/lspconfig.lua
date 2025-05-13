@@ -246,13 +246,12 @@ return {
                 --    https://github.com/pmizio/typescript-tools.nvim
                 basedpyright = {},
                 ruff = {},
+                tailwindcss = {},
             }
             if not isWindowsARM64() then
                 servers = vim.tbl_extend("force", servers, {
                     lua_ls = {},
-                    tailwindcss = {},
                     taplo = {},
-                    astro = {},
                     tinymist = {
                         settings = {
                             formatterMode = "typstyle",
@@ -282,14 +281,14 @@ return {
             -- for you, so that they are available from within Neovim.
             local ensure_installed = vim.tbl_keys(servers or {})
             vim.list_extend(ensure_installed, {
+                "prettier",
                 "pyproject-fmt",
+                "cspell",
+                "eslint",
             })
             if not isWindowsARM64() then
                 vim.list_extend(ensure_installed, {
                     "stylua",
-                    "prettier",
-                    "cspell",
-                    "eslint_d",
                 })
             end
             require("mason-tool-installer").setup {
