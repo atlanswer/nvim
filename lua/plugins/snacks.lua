@@ -64,5 +64,9 @@ return {
                 })
             end,
         })
+
+        vim.api.nvim_create_user_command("Notifications", function()
+            require("snacks").notifier.show_history()
+        end, { desc = "Show notification history" })
     end,
 }
