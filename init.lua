@@ -103,6 +103,18 @@ if vim.fn.index(vim.fn.keys(vim.fn.environ()), "shell", 0, true) == -1 then
     vim.opt.shellxquote = ""
 end
 
+-- Using explorer.exe to open URL
+local original_open = vim.ui.open
+---@param path string
+---@param opt? string[]
+---@diagnostic disable-next-line: duplicate-set-field
+vim.ui.open = function(path, opt)
+    if vim.fn.executable "explorer.exe" and opt == nil then
+        return original_open(path, { cmd = { "explorer.exe" } })
+    end
+    return original_open(path, opt)
+end
+
 -- Disable line number in terminal
 vim.api.nvim_create_autocmd("TermOpen", {
     desc = "Disable line number in terminal mode",
