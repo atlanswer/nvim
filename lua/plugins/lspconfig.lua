@@ -248,6 +248,17 @@ return {
                 ruff = {},
                 tailwindcss = {},
                 jsonls = {},
+                astro = {},
+                eslint = {
+                    settings = {
+                        format = {
+                            enable = false,
+                        },
+                        experimental = {
+                            useFlatConfig = true,
+                        },
+                    },
+                },
             }
             if not isWindowsARM64() then
                 servers = vim.tbl_extend("force", servers, {
@@ -259,11 +270,6 @@ return {
                             formatterPrintWidth = 80,
                         },
                     },
-                    -- kotlin_language_server = {
-                    --     init_options = {
-                    --         storagePath = vim.fn.stdpath "data",
-                    --     },
-                    -- },
                 })
             end
 
@@ -285,7 +291,6 @@ return {
                 "prettier",
                 "pyproject-fmt",
                 "cspell",
-                "eslint",
             })
             if not isWindowsARM64() then
                 vim.list_extend(ensure_installed, {
@@ -307,6 +312,7 @@ return {
             end
 
             vim.lsp.config("lua_ls", {
+                capabilities = require("blink-cmp").get_lsp_capabilities(),
                 settings = {
                     Lua = {
                         completion = {
