@@ -247,6 +247,7 @@ return {
                 basedpyright = {},
                 ruff = {},
                 tailwindcss = {},
+                jsonls = {},
             }
             if not isWindowsARM64() then
                 servers = vim.tbl_extend("force", servers, {
