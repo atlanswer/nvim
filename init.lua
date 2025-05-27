@@ -65,6 +65,9 @@ vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldtext = ""
 vim.opt.foldenable = false
 
+-- Per directory overrides
+vim.opt.exrc = true
+
 -- Add empty blank line
 -- vim.api.nvim_create_autocmd("BufWritePre", {
 --     desc = "Add blank line at the end of file",
