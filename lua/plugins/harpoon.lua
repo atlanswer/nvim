@@ -34,10 +34,10 @@ return {
                 height_in_lines = 16,
             })
         end, { desc = "Toggle [H]arpoon quick menu" })
-        vim.keymap.set("n", "fj", function()
+        vim.keymap.set("n", "<leader>j", function()
             harpoon:list():next { ui_nav_wrap = true }
         end, { desc = "Harpoon next" })
-        vim.keymap.set("n", "fk", function()
+        vim.keymap.set("n", "<leader>k", function()
             harpoon:list():prev { ui_nav_wrap = true }
         end, { desc = "Harpoon previous" })
         vim.keymap.set("n", "g1", function()

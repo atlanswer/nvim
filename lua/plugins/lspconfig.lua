@@ -246,6 +246,7 @@ return {
                 --    https://github.com/pmizio/typescript-tools.nvim
                 basedpyright = {},
                 ruff = {},
+                html = {},
                 tailwindcss = {},
                 jsonls = {},
                 astro = {},
