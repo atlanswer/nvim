@@ -247,6 +247,7 @@ return {
                 basedpyright = {},
                 ruff = {},
                 html = {},
+                cssls = {},
                 tailwindcss = {},
                 jsonls = {},
                 astro = {},
