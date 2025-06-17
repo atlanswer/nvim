@@ -3,8 +3,8 @@ return {
     name = "catppuccin",
     cond = not vim.g.vscode,
     opts = {
-        term_colors = true,
-        transparent_background = false,
+        term_colors = false,
+        transparent_background = true,
         dim_inactive = {
             enabled = true, -- dims the background color of inactive window
             shade = "light",
