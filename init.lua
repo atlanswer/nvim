@@ -59,6 +59,26 @@ vim.opt.guicursor = "a:Cursor/lCursor,\z
                      sm:blinkwait0-blinkoff500-blinkon500,\z
                      t:TermCursor"
 
+-- Experimental
+vim.opt.cmdheight = 0
+vim.api.nvim_create_autocmd("CmdlineEnter", {
+    desc = "Restore cmdline when entered",
+    group = vim.api.nvim_create_augroup(
+        "nvim-restore-cmdline",
+        { clear = true }
+    ),
+    callback = function()
+        vim.opt.cmdheight = 1
+    end,
+})
+vim.api.nvim_create_autocmd("CmdlineLeave", {
+    desc = "Hide cmdline when left",
+    group = vim.api.nvim_create_augroup("nvim-hide-cmdline", { clear = true }),
+    callback = function()
+        vim.opt.cmdheight = 0
+    end,
+})
+
 -- Fold
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
