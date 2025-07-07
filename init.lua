@@ -152,7 +152,7 @@ rtp:prepend(lazypath)
 require("lazy").setup "plugins"
 
 if not vim.g.vscode then
-    vim.cmd.colorscheme "catppuccin"
+    vim.cmd.colorscheme "rose-pine"
 end
 
 -- Key mappings

@@ -2,23 +2,22 @@ return {
     "rose-pine/neovim",
     name = "rose-pine",
     opts = {
+        dark_variant = "moon",
         dim_inactive_windows = true,
         styles = {
             bold = true,
             italic = false,
-            transparency = false,
+            transparency = true,
         },
         highlight_groups = {
             EndOfBuffer = { fg = "base" },
-            BlinkCmpMenuSelection = { bg = "overlay", inherit = false },
-            BlinkCmpLabelMatch = {
-                bold = true,
-                cterm = {
-                    bold = true,
-                },
-                inherit = false,
-            },
+            -- BlinkCmpLabelMatch = {
+            --     bold = true,
+            --     cterm = {
+            --         bold = true,
+            --     },
+            --     inherit = false,
+            -- },
         },
     },
-    cond = false,
 }
