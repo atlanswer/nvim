@@ -42,7 +42,12 @@ return {
 
                     -- Execute a code action, usually your cursor needs to be on top of an error
                     -- or a suggestion from your LSP for this to activate.
-                    map("gca", vim.lsp.buf.code_action, "[C]ode [A]ction")
+                    map(
+                        "gra",
+                        vim.lsp.buf.code_action,
+                        "[G]oto code [A]ction",
+                        { "n", "x" }
+                    )
 
                     -- Find references for the word under your cursor.
                     map(
@@ -54,7 +59,7 @@ return {
                     -- Jump to the implementation of the word under your cursor.
                     --  Useful when your language has ways of declaring types without an actual implementation.
                     map(
-                        "gi",
+                        "gri",
                         require("telescope.builtin").lsp_implementations,
                         "[G]oto [I]mplementation"
                     )
@@ -70,7 +75,7 @@ return {
 
                     -- This is not Goto Definition, this is Goto Declaration.
                     -- For example, in C this would take you to the header.
-                    map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+                    map("grD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 
                     -- Fuzzy find all the symbols in your current document.
                     --  Symbols are things like variables, functions, types, etc.

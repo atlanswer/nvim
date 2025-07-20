@@ -31,7 +31,6 @@ return {
             markdown = { "prettier" },
             astro = { "prettier" },
             toml = { "taplo", "pyproject-fmt" },
-            kotlin = { "ktlint" },
         },
     },
     init = function()
