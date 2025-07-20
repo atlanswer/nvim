@@ -4,6 +4,11 @@ return {
     opts = {
         dark_variant = "moon",
         dim_inactive_windows = true,
+        enable = {
+            terminal = true,
+            legacy_highlights = false,
+            migrations = true,
+        },
         styles = {
             bold = true,
             italic = false,
@@ -11,13 +16,14 @@ return {
         },
         highlight_groups = {
             EndOfBuffer = { fg = "base" },
-            -- BlinkCmpLabelMatch = {
-            --     bold = true,
-            --     cterm = {
-            --         bold = true,
-            --     },
-            --     inherit = false,
-            -- },
+            Folded = { fg = "muted" },
+            BlinkCmpLabelMatch = {
+                bold = true,
+                cterm = {
+                    bold = true,
+                },
+                inherit = false,
+            },
         },
     },
 }

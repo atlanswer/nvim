@@ -83,6 +83,7 @@ vim.api.nvim_create_autocmd("CmdlineLeave", {
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldtext = ""
+vim.opt.fillchars = "fold:-"
 vim.opt.foldenable = false
 
 -- Per directory overrides
