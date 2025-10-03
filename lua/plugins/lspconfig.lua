@@ -271,12 +271,12 @@ return {
                 servers = vim.tbl_extend("force", servers, {
                     lua_ls = {},
                     taplo = {},
-                    tinymist = {
-                        settings = {
-                            formatterMode = "typstyle",
-                            formatterPrintWidth = 80,
-                        },
-                    },
+                    -- tinymist = {
+                    --     settings = {
+                    --         formatterMode = "typstyle",
+                    --         formatterPrintWidth = 80,
+                    --     },
+                    -- },
                 })
             end
 

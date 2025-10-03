@@ -5,6 +5,7 @@ return {
     opts = {
         notifier = { style = "fancy" },
     },
+    priority = 1000,
     init = function()
         ---@type table<number, {token:lsp.ProgressToken, msg:string, done:boolean}[]>
         local progress = vim.defaulttable()
