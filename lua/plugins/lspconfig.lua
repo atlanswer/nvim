@@ -253,7 +253,16 @@ return {
                 bashls = {},
                 ruff = {},
                 ty = {},
-                jsonls = {},
+                jsonls = {
+                    settings = {
+                        json = {
+                            schemas = require("schemastore").json.schemas {
+                                ignore = {},
+                            },
+                            validate = { enable = true },
+                        },
+                    },
+                },
                 html = {},
                 cssls = {},
                 tailwindcss = {},
