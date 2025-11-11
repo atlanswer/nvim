@@ -130,10 +130,9 @@ end
 -- Using explorer.exe to open URL
 local original_open = vim.ui.open
 ---@param path string
----@param opt? string[]
 ---@diagnostic disable-next-line: duplicate-set-field
 vim.ui.open = function(path, opt)
-    if vim.fn.executable "explorer.exe" and opt == nil then
+    if vim.fn.executable "explorer.exe" == 1 and opt == nil then
         return original_open(path, { cmd = { "explorer.exe" } })
     end
     return original_open(path, opt)
