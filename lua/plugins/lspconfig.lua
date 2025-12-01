@@ -330,19 +330,32 @@ return {
                 vim.lsp.enable(server_name)
             end
 
-            vim.lsp.config("lua_ls", {
-                capabilities = require("blink-cmp").get_lsp_capabilities(),
-                settings = {
-                    Lua = {
-                        completion = {
-                            callSnippet = "Replace",
+            if vim.fn.executable "lua-language-server" == 1 then
+                vim.lsp.config("lua_ls", {
+                    capabilities = require("blink-cmp").get_lsp_capabilities(),
+                    settings = {
+                        Lua = {
+                            completion = {
+                                callSnippet = "Replace",
+                            },
+                            -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
+                            diagnostics = { disable = { "missing-fields" } },
                         },
-                        -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-                        diagnostics = { disable = { "missing-fields" } },
                     },
-                },
-            })
-            vim.lsp.enable "lua_ls"
+                })
+                vim.lsp.enable "lua_ls"
+            else
+                vim.notify("lua-language-server not found", vim.log.levels.WARN)
+            end
+
+            if vim.fn.executable "zls" == 1 then
+                vim.lsp.config("zls", {
+                    capabilities = require("blink-cmp").get_lsp_capabilities(),
+                })
+                vim.lsp.enable "zls"
+            else
+                vim.notify("zls not found", vim.log.levels.WARN)
+            end
         end,
     },
 }

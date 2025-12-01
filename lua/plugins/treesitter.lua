@@ -14,8 +14,10 @@ return {
             "vim",
             "vimdoc",
             "html",
+            "zig",
             "javascript",
             "typescript",
+            "python",
         },
         -- Autoinstall languages that are not installed
         auto_install = false,
