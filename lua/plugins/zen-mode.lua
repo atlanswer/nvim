@@ -1,5 +1,6 @@
 return {
     "folke/zen-mode.nvim",
+    cond = not vim.g.vscode,
     opts = {
         width = 100,
         backdrop = 1,

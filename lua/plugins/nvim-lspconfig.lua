@@ -13,10 +13,8 @@ return {
     { -- Main LSP Configuration
         "neovim/nvim-lspconfig",
         dependencies = {
-            { "mason-org/mason.nvim", opts = {} },
-            "mason-org/mason-lspconfig.nvim",
-            "WhoIsSethDaniel/mason-tool-installer.nvim",
             "saghen/blink.cmp",
+            { "mason-org/mason.nvim", opts = {}, event = "VeryLazy" },
         },
         cond = not vim.g.vscode,
         config = function()
@@ -38,16 +36,16 @@ return {
 
                     -- Rename the variable under your cursor.
                     --  Most Language Servers support renaming across files, etc.
-                    map("grn", vim.lsp.buf.rename, "[R]e[n]ame")
+                    -- map("grn", vim.lsp.buf.rename, "[R]e[n]ame")
 
                     -- Execute a code action, usually your cursor needs to be on top of an error
                     -- or a suggestion from your LSP for this to activate.
-                    map(
-                        "gra",
-                        vim.lsp.buf.code_action,
-                        "[G]oto code [A]ction",
-                        { "n", "x" }
-                    )
+                    -- map(
+                    --     "gra",
+                    --     vim.lsp.buf.code_action,
+                    --     "[G]oto code [A]ction",
+                    --     { "n", "x" }
+                    -- )
 
                     -- Find references for the word under your cursor.
                     map(
@@ -225,114 +223,29 @@ return {
             }
 
             -- Check OS and arch
-            local function isWindowsARM64()
-                local platform = string.lower(jit.os)
-                local arch = string.lower(jit.arch)
-                return platform:find "windows" and arch == "arm64"
-            end
+            -- local function isWindowsARM64()
+            --     local platform = string.lower(jit.os)
+            --     local arch = string.lower(jit.arch)
+            --     return platform:find "windows" and arch == "arm64"
+            -- end
 
             -- Enable the following language servers
-            --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
-            --
             --  Add any additional override configuration in the following tables. Available keys are:
             --  - cmd (table): Override the default command used to start the server
             --  - filetypes (table): Override the default list of associated filetypes for the server
             --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
             --  - settings (table): Override the default settings passed when initializing the server.
-            --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
+            --  For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
             local servers = {
                 -- clangd = {},
                 -- gopls = {},
                 -- rust_analyzer = {},
-
+                -- basedpyright = {},
                 -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
                 --
                 -- Some languages (like typescript) have entire language plugins that can be useful:
                 --    https://github.com/pmizio/typescript-tools.nvim
-                -- basedpyright = {},
-                bashls = {},
-                ruff = {},
-                ty = {},
-                jsonls = {
-                    settings = {
-                        json = {
-                            schemas = require("schemastore").json.schemas {
-                                ignore = {},
-                            },
-                            validate = { enable = true },
-                        },
-                    },
-                },
-                html = {},
-                cssls = {},
-                tailwindcss = {},
-                astro = {},
-                eslint = {
-                    settings = {
-                        format = {
-                            enable = false,
-                        },
-                        experimental = {
-                            useFlatConfig = true,
-                        },
-                    },
-                },
-            }
-            if not isWindowsARM64() then
-                servers = vim.tbl_extend("force", servers, {
-                    lua_ls = {},
-                    taplo = {},
-                    -- tinymist = {
-                    --     settings = {
-                    --         formatterMode = "typstyle",
-                    --         formatterPrintWidth = 80,
-                    --     },
-                    -- },
-                })
-            end
-
-            -- Ensure the servers and tools above are installed
-            --
-            -- To check the current status of installed tools and/or manually install
-            -- other tools, you can run
-            --    :Mason
-            --
-            -- You can press `g?` for help in this menu.
-            --
-            -- `mason` had to be setup earlier: to configure its options see the
-            -- `dependencies` table for `nvim-lspconfig` above.
-            --
-            -- You can add other tools here that you want Mason to install
-            -- for you, so that they are available from within Neovim.
-            local ensure_installed = vim.tbl_keys(servers or {})
-            vim.list_extend(ensure_installed, {
-                "prettier",
-                "pyproject-fmt",
-                "cspell",
-            })
-            if not isWindowsARM64() then
-                vim.list_extend(ensure_installed, {
-                    "stylua",
-                })
-            end
-            require("mason-tool-installer").setup {
-                ensure_installed = ensure_installed,
-            }
-            require("mason-lspconfig").setup {
-                ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
-            }
-
-            for server_name, server in pairs(servers) do
-                server.capabilities = require("blink-cmp").get_lsp_capabilities(
-                    server.capabilities
-                )
-                vim.lsp.config(server_name, server)
-                vim.lsp.enable(server_name)
-            end
-
-            if vim.fn.executable "lua-language-server" == 1 then
-                vim.lsp.config("lua_ls", {
-                    capabilities = require("blink-cmp").get_lsp_capabilities(),
+                lua_ls = {
                     settings = {
                         Lua = {
                             completion = {
@@ -342,19 +255,86 @@ return {
                             diagnostics = { disable = { "missing-fields" } },
                         },
                     },
-                })
-                vim.lsp.enable "lua_ls"
-            else
-                vim.notify("lua-language-server not found", vim.log.levels.WARN)
-            end
+                },
+                zls = {},
+                bashls = {
+                    cmd = { "bunx", "--bun", "bash-language-server", "start" },
+                },
+                jsonls = {
+                    cmd = {
+                        "bunx",
+                        "--bun",
+                        "vscode-json-language-server",
+                        "--stdio",
+                    },
+                    settings = {
+                        json = {
+                            schemas = require("schemastore").json.schemas {
+                                ignore = {},
+                            },
+                            validate = { enable = true },
+                        },
+                    },
+                },
+                html = {
+                    cmd = {
+                        "bunx",
+                        "--bun",
+                        "vscode-html-language-server",
+                        "--stdio",
+                    },
+                },
+                cssls = {
+                    cmd = {
+                        "bunx",
+                        "--bun",
+                        "vscode-css-language-server",
+                        "--stdio",
+                    },
+                },
+                tailwindcss = {
+                    cmd = {
+                        "bunx",
+                        "--bun",
+                        "tailwindcss-language-server",
+                        "--stdio",
+                    },
+                },
+                astro = {
+                    cmd = { "bunx", "--bun", "astro-ls", "--stdio" },
+                },
+                ruff = {
+                    cmd = { "uvx", "ruff", "server" },
+                },
+                ty = {
+                    cmd = { "uvx", "ty", "server" },
+                },
+                -- eslint = {
+                --     settings = {
+                --         format = {
+                --             enable = false,
+                --         },
+                --         experimental = {
+                --             useFlatConfig = true,
+                --         },
+                --     },
+                -- },
+                -- taplo = {}
+                -- tinymist = {
+                --     settings = {
+                --         formatterMode = "typstyle",
+                --         formatterPrintWidth = 80,
+                --     },
+                -- },
+            }
 
-            if vim.fn.executable "zls" == 1 then
-                vim.lsp.config("zls", {
-                    capabilities = require("blink-cmp").get_lsp_capabilities(),
-                })
-                vim.lsp.enable "zls"
-            else
-                vim.notify("zls not found", vim.log.levels.WARN)
+            -- Enable all language servers
+            for server_name, server in pairs(servers) do
+                server.capabilities = require("blink-cmp").get_lsp_capabilities(
+                    server.capabilities
+                )
+                vim.lsp.config(server_name, server)
+                vim.lsp.enable(server_name)
             end
         end,
     },

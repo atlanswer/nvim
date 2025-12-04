@@ -1,6 +1,7 @@
 return {
     "nuvic/flexoki-nvim",
     name = "flexoki",
+    cond = false,
     opts = {
         dim_inactive_windows = true,
         styles = {
@@ -8,5 +9,4 @@ return {
             italic = false,
         },
     },
-    cond = false,
 }

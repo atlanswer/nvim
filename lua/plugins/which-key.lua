@@ -1,6 +1,7 @@
 return {
     "folke/which-key.nvim",
     event = "VeryLazy",
+    cond = not vim.g.vscode,
     opts = {
         delay = 1000,
         icons = {
@@ -17,6 +18,4 @@ return {
             { "<leader>g", group = "[G]it" },
         },
     },
-    cond = not vim.g.vscode,
 }
-

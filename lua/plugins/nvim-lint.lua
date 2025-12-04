@@ -1,8 +1,10 @@
 return {
     "mfussenegger/nvim-lint",
     event = { "BufReadPre", "BufNewFile" },
+    cond = not vim.g.vscode,
     config = function()
         local lint = require "lint"
+
         lint.linters_by_ft = {
             kotlin = { "ktlint" },
         }
@@ -25,6 +27,7 @@ return {
         end, {
             desc = "[C]heck [S]pelling",
         })
+
+        lint.linters.cspell.cmd = "bunx --bun cspell"
     end,
-    cond = not vim.g.vscode,
 }

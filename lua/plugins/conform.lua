@@ -20,19 +20,25 @@ return {
         notify_on_error = true,
         notify_no_formatters = true,
         formatters_by_ft = {
-            html = { "prettier" },
             lua = { "stylua" },
             json = { "prettier" },
             jsonc = { "prettier" },
+            html = { "prettier" },
             javascript = { "prettier" },
             typescript = { "prettier" },
             typescriptreact = { "prettier" },
             css = { "prettier" },
             markdown = { "prettier" },
             astro = { "prettier" },
-            toml = { "taplo", "pyproject-fmt" },
+            toml = { "pyproject-fmt" },
+        },
+        formatters = {
+            prettier = {
+                command = "bunx --bun prettier",
+            },
         },
     },
+
     init = function()
         vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
     end,

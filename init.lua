@@ -1,8 +1,11 @@
 -- Map leader keys
 vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+vim.g.maplocalleader = "\\"
 
 vim.g.have_nerd_font = true
+
+vim.opt.linebreak = true
+vim.opt.list = true
 
 -- Line numbers
 vim.opt.number = true
@@ -12,6 +15,9 @@ vim.opt.mouse = "a"
 
 vim.opt.showmode = false
 
+vim.opt.switchbuf = "usetab"
+vim.opt.shada = "'100,<50,s10,:100,/100,@100,h,ra:,rb:,r/tmp"
+
 vim.opt.swapfile = false
 vim.opt.undofile = true
 
@@ -20,19 +26,24 @@ vim.opt.confirm = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
-vim.opt.cursorline = true
-
 vim.opt.signcolumn = "yes"
 vim.opt.colorcolumn = "81"
 
 vim.opt.updatetime = 300
 vim.opt.timeoutlen = 1000
 
-vim.opt.splitright = true
+vim.opt.splitkeep = "screen"
 vim.opt.splitbelow = true
+vim.opt.splitright = true
 
 vim.opt.list = true
-vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+vim.opt.listchars = {
+    tab = "» ",
+    trail = "·",
+    nbsp = "␣",
+    extends = "…",
+    precedes = "…",
+}
 
 vim.opt.inccommand = "split"
 vim.opt.incsearch = true
@@ -46,18 +57,31 @@ vim.opt.expandtab = true
 
 vim.opt.cindent = true
 vim.opt.breakindent = true
+vim.opt.breakindentopt = "list:-1"
+
+-- Default fold
+vim.opt.foldenable = false
+vim.opt.foldmethod = "indent"
+vim.opt.foldtext = ""
+vim.opt.foldnestmax = 10
 
 vim.opt.scrolloff = 10
 
 vim.opt.hlsearch = true
-
 vim.opt.termguicolors = true
+
+vim.opt.cursorline = true
+vim.opt.cursorlineopt = "screenline,number"
 vim.opt.guicursor = "a:Cursor/lCursor,\z
                      n-v-c:block,\z
                      i-ci-ve:ver25-blinkwait0-blinkoff500-blinkon500,\z
                      r-cr-o:hor20,\z
                      sm:blinkwait0-blinkoff500-blinkon500,\z
                      t:TermCursor"
+
+vim.opt.pumheight = 10
+
+vim.opt.winborder = "rounded"
 
 -- Experimental
 -- vim.opt.cmdheight = 0
@@ -78,13 +102,6 @@ vim.opt.guicursor = "a:Cursor/lCursor,\z
 --         vim.opt.cmdheight = 0
 --     end,
 -- })
-
--- Fold
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-vim.opt.foldtext = ""
-vim.opt.fillchars = "fold:-"
-vim.opt.foldenable = false
 
 -- Per directory overrides
 vim.opt.exrc = true
@@ -148,32 +165,28 @@ vim.api.nvim_create_autocmd("TermOpen", {
     end,
 })
 
--- Load Lazy
-local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
-if not vim.uv.fs_stat(lazypath) then
-    local lazyrepo = "https://github.com/folke/lazy.nvim.git"
-    local out = vim.fn.system {
-        "git",
-        "clone",
-        "--filter=blob:none",
-        "--branch=stable",
-        lazyrepo,
-        lazypath,
-    }
-    if vim.v.shell_error ~= 0 then
-        error("Error cloning lazy.nvim:\n" .. out)
-    end
-end
+-- Lazy.nvim
+require "config.lazy"
 
-----@type vim.Option
-local rtp = vim.opt.rtp
-rtp:prepend(lazypath)
+-- Treesitter
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "lua", "javascript", "typescript", "zig" },
+    callback = function()
+        -- syntax highlighting, provided by Neovim
+        vim.treesitter.start()
+        -- folds, provided by Neovim
+        vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+        vim.wo.foldmethod = "expr"
+        vim.wo.fillchars = "fold:-"
+        -- indentation, provided by nvim-treesitter
+        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    end,
+})
 
-require("lazy").setup "plugins"
-
+-- Default color scheme
 if not vim.g.vscode then
     vim.cmd.colorscheme "rose-pine"
 end
 
 -- Key mappings
-require "keymaps"
+require "config.keymaps"

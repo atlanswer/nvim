@@ -1,5 +1,6 @@
 return {
     "navarasu/onedark.nvim",
+    cond = false,
     opts = {
         style = "warmer",
         -- Flexoki: https://stephango.com/flexoki
@@ -33,5 +34,4 @@ return {
         },
         highlights = {},
     },
-    cond = false,
 }
