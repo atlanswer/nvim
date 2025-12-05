@@ -1,16 +1,16 @@
 -- Move selection
-vim.keymap.set(
-    "n",
-    "<A-j>",
-    "<cmd>execute 'move .+' . v:count1<cr>==",
-    { desc = "Move line down" }
-)
-vim.keymap.set(
-    "n",
-    "<A-k>",
-    "<cmd>execute 'move .-' . (v:count1 + 1)<cr>==",
-    { desc = "Move line up" }
-)
+-- vim.keymap.set(
+--     "n",
+--     "<A-j>",
+--     "<cmd>execute 'move .+' . v:count1<cr>==",
+--     { desc = "Move line down" }
+-- )
+-- vim.keymap.set(
+--     "n",
+--     "<A-k>",
+--     "<cmd>execute 'move .-' . (v:count1 + 1)<cr>==",
+--     { desc = "Move line up" }
+-- )
 -- vim.keymap.set(
 --     "i",
 --     "<A-j>",
@@ -23,18 +23,18 @@ vim.keymap.set(
 --     "<esc><cmd>m .-2<cr>==gi",
 --     { desc = "Move line up" }
 -- )
-vim.keymap.set(
-    "v",
-    "<A-j>",
-    ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv",
-    { desc = "Move selection down" }
-)
-vim.keymap.set(
-    "v",
-    "<A-k>",
-    ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv",
-    { desc = "Move selection up" }
-)
+-- vim.keymap.set(
+--     "v",
+--     "<A-j>",
+--     ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv",
+--     { desc = "Move selection down" }
+-- )
+-- vim.keymap.set(
+--     "v",
+--     "<A-k>",
+--     ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv",
+--     { desc = "Move selection up" }
+-- )
 
 -- Window scroll
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
@@ -88,8 +88,8 @@ vim.keymap.set(
 )
 
 -- Better indenting
-vim.keymap.set("v", "<", "<gv")
-vim.keymap.set("v", ">", ">gv")
+-- vim.keymap.set("v", "<", "<gv")
+-- vim.keymap.set("v", ">", ">gv")
 
 -- Search
 vim.keymap.set("n", "n", "nzzzv")
