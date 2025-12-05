@@ -33,8 +33,15 @@ return {
             toml = { "pyproject-fmt" },
         },
         formatters = {
+            -- https://github.com/stevearc/conform.nvim/blob/master/lua/conform/formatters/prettier.lua
             prettier = {
-                command = "bunx --bun prettier",
+                command = "bunx",
+                args = { "--bun", "prettier", "--stdin-filepath", "$FILENAME" },
+            },
+            -- https://github.com/stevearc/conform.nvim/blob/master/lua/conform/formatters/pyproject-fmt.lua
+            ["pyproject-fmt"] = {
+                command = "uvx",
+                args = { "pyproject-fmt", "-" },
             },
         },
     },

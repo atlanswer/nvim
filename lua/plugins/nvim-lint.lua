@@ -28,6 +28,18 @@ return {
             desc = "[C]heck [S]pelling",
         })
 
-        lint.linters.cspell.cmd = "bunx --bun cspell"
+        -- https://github.com/mfussenegger/nvim-lint/blob/master/lua/lint/linters/cspell.lua
+        lint.linters.cspell.cmd = "bunx"
+        lint.linters.cspell.args = {
+            "--bun",
+            "cspell",
+            "lint",
+            "--no-color",
+            "--no-progress",
+            "--no-summary",
+            function()
+                return "stdin://" .. vim.api.nvim_buf_get_name(0)
+            end,
+        }
     end,
 }

@@ -264,6 +264,8 @@ return {
                     cmd = {
                         "bunx",
                         "--bun",
+                        "-p",
+                        "vscode-langservers-extracted",
                         "vscode-json-language-server",
                         "--stdio",
                     },
@@ -280,6 +282,8 @@ return {
                     cmd = {
                         "bunx",
                         "--bun",
+                        "-p",
+                        "vscode-langservers-extracted",
                         "vscode-html-language-server",
                         "--stdio",
                     },
@@ -288,6 +292,8 @@ return {
                     cmd = {
                         "bunx",
                         "--bun",
+                        "-p",
+                        "vscode-langservers-extracted",
                         "vscode-css-language-server",
                         "--stdio",
                     },
@@ -296,12 +302,21 @@ return {
                     cmd = {
                         "bunx",
                         "--bun",
+                        "-p",
+                        "@tailwindcss/language-server",
                         "tailwindcss-language-server",
                         "--stdio",
                     },
                 },
                 astro = {
-                    cmd = { "bunx", "--bun", "astro-ls", "--stdio" },
+                    cmd = {
+                        "bunx",
+                        "--bun",
+                        "-p",
+                        "@astrojs/language-server",
+                        "astro-ls",
+                        "--stdio",
+                    },
                 },
                 ruff = {
                     cmd = { "uvx", "ruff", "server" },

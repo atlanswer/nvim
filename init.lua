@@ -170,7 +170,23 @@ require "config.lazy"
 
 -- Treesitter
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "lua", "html", "css", "javascript", "typescript", "tsx", "zig" },
+    pattern = {
+        "lua",
+        "c",
+        "cpp",
+        "cmake",
+        "json",
+        "html",
+        "css",
+        "javascript",
+        "typescript",
+        "tsx",
+        "zig",
+        "markdown",
+        "toml",
+        "yaml",
+        "gitignore",
+    },
     callback = function()
         -- syntax highlighting, provided by Neovim
         vim.treesitter.start()
