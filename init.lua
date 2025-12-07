@@ -172,6 +172,10 @@ require "config.lazy"
 vim.api.nvim_create_autocmd("FileType", {
     pattern = {
         "lua",
+        "vim",
+        "vimdoc",
+        "markdown",
+        "zig",
         "c",
         "cpp",
         "cmake",
@@ -180,9 +184,8 @@ vim.api.nvim_create_autocmd("FileType", {
         "css",
         "javascript",
         "typescript",
+        "astro",
         "tsx",
-        "zig",
-        "markdown",
         "toml",
         "yaml",
         "gitignore",
