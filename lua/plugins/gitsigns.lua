@@ -33,12 +33,12 @@ return {
 
                 -- Actions
                 -- visual mode
-                map("v", "<leader>hs", function()
+                map("v", "<leader>gs", function()
                     gitsigns.stage_hunk { vim.fn.line ".", vim.fn.line "v" }
-                end, { desc = "Git [s]tage hunk" })
-                map("v", "<leader>hr", function()
+                end, { desc = "Git: Stage hunk" })
+                map("v", "<leader>gr", function()
                     gitsigns.reset_hunk { vim.fn.line ".", vim.fn.line "v" }
-                end, { desc = "Git [r]eset hunk" })
+                end, { desc = "Git: Reset hunk" })
                 -- map(
                 --     "n",
                 --     "<leader>hs",
@@ -51,12 +51,6 @@ return {
                 --     gitsigns.reset_hunk,
                 --     { desc = "[R]eset hunk" }
                 -- )
-                -- map("v", "<leader>hs", function()
-                --     gitsigns.stage_hunk { vim.fn.line ".", vim.fn.line "v" }
-                -- end, { desc = "[S]tage hunk" })
-                -- map("v", "<leader>hr", function()
-                --     gitsigns.reset_hunk { vim.fn.line ".", vim.fn.line "v" }
-                -- end, { desc = "[R]eset hunk" })
                 -- map(
                 --     "n",
                 --     "<leader>hS",
@@ -88,25 +82,30 @@ return {
                     "n",
                     "<leader>tb",
                     gitsigns.toggle_current_line_blame,
-                    { desc = "[T]oggle current line blame" }
+                    { desc = "Git: Toggle current line blame" }
                 )
-                map(
-                    "n",
-                    "<leader>gd",
-                    gitsigns.diffthis,
-                    { desc = "[G]it [D]iff this" }
-                )
-                map("n", "<leader>gD", function()
-                    gitsigns.diffthis "~"
-                end, { desc = "[G]it [D]iff this against ~" })
+                -- map(
+                --     "n",
+                --     "<leader>gd",
+                --     gitsigns.diffthis,
+                --     { desc = "[G]it [D]iff this" }
+                -- )
+                -- map("n", "<leader>gD", function()
+                --     gitsigns.diffthis "~"
+                -- end, { desc = "[G]it [D]iff this against ~" })
                 map(
                     "n",
                     "<leader>tD",
                     gitsigns.preview_hunk_inline,
-                    { desc = "Git [T]oggle show [D]eleted" }
+                    { desc = "Git: Toggle show deleted" }
                 )
                 -- Text object
-                map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
+                map(
+                    { "o", "x" },
+                    "ih",
+                    ":<C-U>Gitsigns select_hunk<CR>",
+                    { desc = "Git: Select hunk" }
+                )
             end,
         }
     end,

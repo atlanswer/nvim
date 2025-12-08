@@ -60,10 +60,11 @@ vim.opt.breakindent = true
 vim.opt.breakindentopt = "list:-1"
 
 -- Default fold
-vim.opt.foldenable = false
+-- vim.opt.foldenable = false
+vim.opt.foldlevel = 10
 vim.opt.foldmethod = "indent"
-vim.opt.foldtext = ""
 vim.opt.foldnestmax = 10
+vim.opt.foldtext = ""
 
 vim.opt.scrolloff = 10
 
@@ -184,8 +185,8 @@ vim.api.nvim_create_autocmd("FileType", {
         "css",
         "javascript",
         "typescript",
+        "typescriptreact",
         "astro",
-        "tsx",
         "toml",
         "yaml",
         "gitignore",

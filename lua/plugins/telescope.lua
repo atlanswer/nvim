@@ -6,7 +6,8 @@ return {
         "nvim-telescope/telescope-ui-select.nvim",
         "nvim-telescope/telescope-frecency.nvim",
     },
-    cond = not vim.g.vscode,
+    -- cond = not vim.g.vscode,
+    cond = false,
     config = function()
         local telescope = require "telescope"
         local telescipeConfig = require "telescope.config"
@@ -83,15 +84,15 @@ return {
             builtin.keymaps,
             { desc = "[S]earch [K]eymaps" }
         )
-        -- vim.keymap.set(
-        --     "n",
-        --     "<leader>sf",
-        --     builtin.find_files,
-        --     { desc = "[S]earch [F]iles" }
-        -- )
-        -- vim.keymap.set("n", "<leader>sn", function()
-        --     builtin.find_files { cwd = vim.fn.stdpath "config" }
-        -- end, { desc = "[S]earch [N]eovim files" })
+        vim.keymap.set(
+            "n",
+            "<leader>sf",
+            builtin.find_files,
+            { desc = "[S]earch [F]iles" }
+        )
+        vim.keymap.set("n", "<leader>sn", function()
+            builtin.find_files { cwd = vim.fn.stdpath "config" }
+        end, { desc = "[S]earch [N]eovim files" })
         vim.keymap.set(
             "n",
             "<leader>sb",

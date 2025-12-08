@@ -35,27 +35,33 @@ return {
             ["<A-l>"] = { "actions.refresh" },
             ["<leader>sf"] = {
                 function()
+                    Snacks.picker.files {
+                        cwd = require("oil").get_current_dir(),
+                    }
                     -- require("fff").find_files_in_dir(
                     --     require("oil").get_current_dir()
                     -- )
-                    require("telescope.builtin").find_files {
-                        cwd = require("oil").get_current_dir(),
-                    }
+                    -- desc = "FFFind files in the current directory",
+                    -- require("telescope.builtin").find_files {
+                    --     cwd = require("oil").get_current_dir(),
+                    -- }
                 end,
-                mode = "n",
+                mode = { "n" },
                 nowait = true,
-                -- desc = "FFFind files in the current directory",
-                desc = "[S]earch [F]iles in the current directory",
+                desc = "Snacks Picker: Search files in the current directory",
             },
             ["<leader>sg"] = {
                 function()
-                    require("telescope.builtin").live_grep {
+                    Snacks.picker.grep {
                         cwd = require("oil").get_current_dir(),
                     }
+                    -- require("telescope.builtin").live_grep {
+                    --     cwd = require("oil").get_current_dir(),
+                    -- }
                 end,
                 mode = "n",
                 nowait = true,
-                desc = "Live [G]rep in the current directory",
+                desc = "Snacks Picker: Grep in the current directory",
             },
         },
     },
