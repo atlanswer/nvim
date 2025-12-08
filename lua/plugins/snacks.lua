@@ -1,11 +1,14 @@
 return {
     "folke/snacks.nvim",
+    priority = 1000,
+    lazy = false,
     cond = not vim.g.vscode,
     ---@type snacks.Config
     opts = {
-        notifier = { style = "fancy" },
+        picker = { enabled = true },
+        notifier = { enabled = true, style = "fancy" },
+        -- zen = {},
     },
-    priority = 1000,
     init = function()
         ---@type table<number, {token:lsp.ProgressToken, msg:string, done:boolean}[]>
         local progress = vim.defaulttable()
@@ -67,7 +70,33 @@ return {
         })
 
         vim.api.nvim_create_user_command("Notifications", function()
-            require("snacks").notifier.show_history()
+            Snacks.notifier.show_history()
         end, { desc = "Show notification history" })
     end,
+    keys = {
+        -- Pickers
+        {
+            "<leader>sf",
+            function()
+                Snacks.picker.files()
+            end,
+            desc = "Snacks Picker: Find files",
+        },
+        {
+            "<leader>sn",
+            function()
+                Snacks.picker.files { cwd = vim.fn.stdpath "config" }
+            end,
+            desc = "Snacks Picker: Find Neovim config files",
+        },
+        -- Bufdelete
+        {
+            "<leader>bd",
+            function()
+                Snacks.bufdelete.delete()
+            end,
+            mode = { "n" },
+            desc = "Delete buffer without disrupting window layout",
+        },
+    },
 }

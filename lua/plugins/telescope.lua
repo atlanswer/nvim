@@ -83,12 +83,15 @@ return {
             builtin.keymaps,
             { desc = "[S]earch [K]eymaps" }
         )
-        vim.keymap.set(
-            "n",
-            "<leader>sf",
-            builtin.find_files,
-            { desc = "[S]earch [F]iles" }
-        )
+        -- vim.keymap.set(
+        --     "n",
+        --     "<leader>sf",
+        --     builtin.find_files,
+        --     { desc = "[S]earch [F]iles" }
+        -- )
+        -- vim.keymap.set("n", "<leader>sn", function()
+        --     builtin.find_files { cwd = vim.fn.stdpath "config" }
+        -- end, { desc = "[S]earch [N]eovim files" })
         vim.keymap.set(
             "n",
             "<leader>sb",
@@ -149,9 +152,6 @@ return {
             builtin.current_buffer_fuzzy_find,
             { desc = "[/] Fuzzily search in current buffer" }
         )
-        vim.keymap.set("n", "<leader>sn", function()
-            builtin.find_files { cwd = vim.fn.stdpath "config" }
-        end, { desc = "[S]earch [N]eovim files" })
         vim.keymap.set(
             "n",
             "<leader>gs",
