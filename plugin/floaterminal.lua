@@ -1,3 +1,7 @@
+---@class FloatState
+---@field floating { buf: number, win: number }
+
+---@type FloatState
 local state = {
     floating = {
         buf = -1,
@@ -5,7 +9,8 @@ local state = {
     },
 }
 
-local function get_float_dimensions()
+---@return vim.api.keyset.win_config
+local function get_float_win_config()
     local nvim_width = vim.o.columns
     local nvim_height = vim.o.lines
 
@@ -15,18 +20,18 @@ local function get_float_dimensions()
     local col = math.floor((nvim_width - width) / 2)
     local row = math.floor((nvim_height - height) / 2)
 
-    return { width = width, height = height, col = col, row = row }
-end
-
-local function get_float_win_config()
-    local win_config = {
+    return {
+        width = width,
+        height = height,
+        col = col,
+        row = row,
         relative = "editor",
         style = "minimal",
         border = "rounded",
     }
-    return vim.tbl_extend("keep", win_config, get_float_dimensions())
 end
 
+---@return FloatState
 local function create_floating_window(opts)
     opts = opts or {}
 
@@ -55,7 +60,7 @@ vim.api.nvim_create_autocmd("VimResized", {
     end,
 })
 
-vim.api.nvim_create_user_command("Floaterm", function()
+vim.api.nvim_create_user_command("Floaterm", function(args)
     if not vim.api.nvim_win_is_valid(state.floating.win) then
         state.floating = create_floating_window { buf = state.floating.buf }
         if vim.bo[state.floating.buf].buftype ~= "terminal" then
@@ -70,4 +75,3 @@ end, {})
 vim.keymap.set({ "n", "t" }, "<A-t>", function()
     vim.cmd "Floaterm"
 end, { desc = "Toggle floating terminal" })
-
