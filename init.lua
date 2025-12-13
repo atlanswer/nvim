@@ -187,9 +187,13 @@ vim.api.nvim_create_autocmd("FileType", {
         "typescript",
         "typescriptreact",
         "astro",
+        "python",
         "toml",
         "yaml",
         "gitignore",
+        "git_config",
+        "gitcommit",
+        "gitrebase",
     },
     callback = function()
         -- syntax highlighting, provided by Neovim
