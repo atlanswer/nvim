@@ -196,7 +196,9 @@ vim.api.nvim_create_autocmd("FileType", {
         "git_rebase",
         "gitignore",
         "gitattributes",
+        "bash",
         "zsh",
+        "powershell",
     },
     callback = function()
         -- syntax highlighting, provided by Neovim
