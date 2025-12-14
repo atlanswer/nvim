@@ -186,14 +186,17 @@ vim.api.nvim_create_autocmd("FileType", {
         "javascript",
         "typescript",
         "typescriptreact",
+        "tsx", -- What should I use?
         "astro",
         "python",
         "toml",
         "yaml",
-        "gitignore",
         "git_config",
         "gitcommit",
-        "gitrebase",
+        "git_rebase",
+        "gitignore",
+        "gitattributes",
+        "zsh",
     },
     callback = function()
         -- syntax highlighting, provided by Neovim
