@@ -101,8 +101,9 @@ return {
             -- See :help vim.diagnostic.Opts
             vim.diagnostic.config {
                 severity_sort = true,
-                float = { border = "rounded", source = "if_many" },
                 underline = { severity = vim.diagnostic.severity.ERROR },
+                virtual_text = { source = true },
+                float = { source = true },
                 signs = vim.g.have_nerd_font
                         and {
                             text = {
@@ -113,19 +114,6 @@ return {
                             },
                         }
                     or {},
-                virtual_text = {
-                    source = "if_many",
-                    spacing = 2,
-                    format = function(diagnostic)
-                        local diagnostic_message = {
-                            [vim.diagnostic.severity.ERROR] = diagnostic.message,
-                            [vim.diagnostic.severity.WARN] = diagnostic.message,
-                            [vim.diagnostic.severity.INFO] = diagnostic.message,
-                            [vim.diagnostic.severity.HINT] = diagnostic.message,
-                        }
-                        return diagnostic_message[diagnostic.severity]
-                    end,
-                },
             }
 
             -- Check OS and arch
@@ -164,12 +152,17 @@ return {
                 clangd = {},
                 zls = {},
                 bashls = {
-                    cmd = { "bunx", "--bun", "bash-language-server", "start" },
+                    cmd = {
+                        "bunx",
+                        -- "--bun",
+                        "bash-language-server",
+                        "start",
+                    },
                 },
                 jsonls = {
                     cmd = {
                         "bunx",
-                        "--bun",
+                        -- "--bun",
                         "-p",
                         "vscode-langservers-extracted",
                         "vscode-json-language-server",
@@ -187,7 +180,7 @@ return {
                 html = {
                     cmd = {
                         "bunx",
-                        "--bun",
+                        -- "--bun",
                         "-p",
                         "vscode-langservers-extracted",
                         "vscode-html-language-server",
@@ -197,7 +190,7 @@ return {
                 cssls = {
                     cmd = {
                         "bunx",
-                        "--bun",
+                        -- "--bun",
                         "-p",
                         "vscode-langservers-extracted",
                         "vscode-css-language-server",
@@ -207,7 +200,7 @@ return {
                 tailwindcss = {
                     cmd = {
                         "bunx",
-                        "--bun",
+                        -- "--bun",
                         "-p",
                         "@tailwindcss/language-server",
                         "tailwindcss-language-server",
@@ -217,7 +210,7 @@ return {
                 astro = {
                     cmd = {
                         "bunx",
-                        "--bun",
+                        -- "--bun",
                         "-p",
                         "@astrojs/language-server",
                         "astro-ls",
@@ -229,6 +222,22 @@ return {
                 },
                 ty = {
                     cmd = { "uvx", "ty", "server" },
+                },
+                yamlls = {
+                    cmd = {
+                        "bunx",
+                        -- "--bun",
+                        "yaml-language-server",
+                        "--stdio",
+                    },
+                    schemaStore = {
+                        -- You must disable built-in schemaStore support if you want to use
+                        -- this plugin and its advanced options like `ignore`.
+                        enable = false,
+                        -- Avoid TypeError: Cannot read properties of undefined (reading 'length')
+                        url = "",
+                    },
+                    schemas = require("schemastore").yaml.schemas(),
                 },
                 -- eslint = {
                 --     settings = {

@@ -180,6 +180,7 @@ vim.api.nvim_create_autocmd("FileType", {
         "c",
         "cpp",
         "cmake",
+        "rust",
         "json",
         "html",
         "css",
