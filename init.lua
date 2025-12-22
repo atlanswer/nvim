@@ -182,11 +182,13 @@ vim.api.nvim_create_autocmd("FileType", {
         "cmake",
         "rust",
         "json",
+        "jsonc",
         "html",
         "css",
         "javascript",
         "typescript",
         "typescriptreact",
+        "typescript.tsx", -- really?
         "tsx", -- What should I use?
         "astro",
         "python",

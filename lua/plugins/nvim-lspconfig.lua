@@ -14,7 +14,7 @@ return {
         "neovim/nvim-lspconfig",
         dependencies = {
             "saghen/blink.cmp",
-            { "mason-org/mason.nvim", opts = {}, event = "VeryLazy" },
+            { "mason-org/mason.nvim", opts = {} },
         },
         cond = not vim.g.vscode,
         init = function()
@@ -130,6 +130,7 @@ return {
             --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
             --  - settings (table): Override the default settings passed when initializing the server.
             --  For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
+            ---@type table<string, vim.lsp.Config>
             local servers = {
                 -- gopls = {},
                 -- rust_analyzer = {},
@@ -154,7 +155,7 @@ return {
                 bashls = {
                     cmd = {
                         "bunx",
-                        -- "--bun",
+                        "--bun",
                         "bash-language-server",
                         "start",
                     },
@@ -174,6 +175,7 @@ return {
                                 ignore = {},
                             },
                             validate = { enable = true },
+                            format = { enable = false },
                         },
                     },
                 },
@@ -200,7 +202,7 @@ return {
                 tailwindcss = {
                     cmd = {
                         "bunx",
-                        -- "--bun",
+                        "--bun",
                         "-p",
                         "@tailwindcss/language-server",
                         "tailwindcss-language-server",
@@ -210,7 +212,7 @@ return {
                 astro = {
                     cmd = {
                         "bunx",
-                        -- "--bun",
+                        "--bun",
                         "-p",
                         "@astrojs/language-server",
                         "astro-ls",
@@ -226,7 +228,7 @@ return {
                 yamlls = {
                     cmd = {
                         "bunx",
-                        -- "--bun",
+                        "--bun",
                         "yaml-language-server",
                         "--stdio",
                     },
