@@ -6,11 +6,9 @@ return {
         "neovim/nvim-lspconfig",
         "saghen/blink.cmp",
     },
-    cond = not vim.g.vscode,
+    -- cond = not vim.g.vscode,
+    cond = false,
     opts = {
         capabilities = require("blink-cmp").get_lsp_capabilities(),
-        settings = {
-            expose_as_code_action = "all",
-        },
     },
 }

@@ -202,6 +202,7 @@ vim.api.nvim_create_autocmd("FileType", {
         "bash",
         "zsh",
         "powershell",
+        "hyprlang",
         "latex",
     },
     callback = function()

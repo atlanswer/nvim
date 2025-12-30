@@ -199,6 +199,33 @@ return {
                         "--stdio",
                     },
                 },
+                tsgo = {
+                    cmd = function(dispatchers, config)
+                        local local_cmd = (config or {}).root_dir
+                            and config.root_dir .. "/node_modules/.bin/tsgo"
+                        if local_cmd and vim.fn.executable(local_cmd) == 1 then
+                            return vim.lsp.rpc.start(
+                                { local_cmd, "--lsp", "--stdio" },
+                                dispatchers
+                            )
+                        else
+                            return vim.lsp.rpc.start({
+                                "bunx",
+                                "--bun",
+                                "-p",
+                                "@typescript/native-preview",
+                                "tsgo",
+                                "--lsp",
+                                "--stdio",
+                            }, dispatchers)
+                        end
+                    end,
+                    init_options = {
+                        preferences = {
+                            preferTypeOnlyAutoImports = true,
+                        },
+                    },
+                },
                 tailwindcss = {
                     cmd = {
                         "bunx",
