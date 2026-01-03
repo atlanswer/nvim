@@ -173,6 +173,7 @@ require "config.lazy"
 vim.api.nvim_create_autocmd("FileType", {
     pattern = {
         "lua",
+        "luadoc",
         "vim",
         "vimdoc",
         "markdown",
@@ -182,10 +183,10 @@ vim.api.nvim_create_autocmd("FileType", {
         "cmake",
         "rust",
         "json",
-        "jsonc",
         "html",
         "css",
         "javascript",
+        "jsdoc",
         "typescript",
         "typescriptreact",
         "typescript.tsx", -- really?
@@ -194,11 +195,13 @@ vim.api.nvim_create_autocmd("FileType", {
         "python",
         "toml",
         "yaml",
+        "ssh_config",
         "git_config",
         "gitcommit",
         "git_rebase",
         "gitignore",
         "gitattributes",
+        "editorconfig",
         "bash",
         "zsh",
         "powershell",
