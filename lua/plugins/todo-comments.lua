@@ -3,11 +3,16 @@ return {
     event = "VeryLazy",
     dependencies = { "nvim-lua/plenary.nvim" },
     cond = not vim.g.vscode,
-    opts = {},
+    opts = {
+        keywords = {
+            TEMP = { icon = " ", color = "hint" },
+        },
+    },
     keys = {
         {
             "<leader>st",
             function()
+                ---@diagnostic disable-next-line: undefined-global
                 Snacks.picker.todo_comments()
             end,
             desc = "Search: Todo",
@@ -15,6 +20,7 @@ return {
         {
             "<leader>sT",
             function()
+                ---@diagnostic disable-next-line: undefined-global
                 Snacks.picker.todo_comments {
                     keywords = { "TODO", "FIX", "FIXME" },
                 }
