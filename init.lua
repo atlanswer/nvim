@@ -207,6 +207,7 @@ vim.api.nvim_create_autocmd("FileType", {
         "powershell",
         "hyprlang",
         "latex",
+        "kotlin",
     },
     callback = function()
         -- syntax highlighting, provided by Neovim
