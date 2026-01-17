@@ -1,19 +1,7 @@
 return {
     "stevearc/conform.nvim",
+    cond = not vim.g.vscode,
     cmd = { "ConformInfo" },
-    keys = {
-        {
-            "<leader>f",
-            function()
-                require("conform").format {
-                    async = true,
-                    lsp_format = "fallback",
-                }
-            end,
-            mode = "",
-            desc = "[F]ormat buffer",
-        },
-    },
     ---@module "conform"
     ---@type conform.setupOpts
     opts = {
@@ -46,9 +34,19 @@ return {
             },
         },
     },
-
     init = function()
         vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
     end,
-    cond = not vim.g.vscode,
+    keys = {
+        {
+            "<leader>f",
+            function()
+                require("conform").format {
+                    async = true,
+                    lsp_format = "fallback",
+                }
+            end,
+            desc = "[F]ormat buffer",
+        },
+    },
 }

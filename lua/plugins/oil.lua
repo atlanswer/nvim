@@ -1,6 +1,6 @@
 return {
     "stevearc/oil.nvim",
-    dependencies = { { "echasnovski/mini.nvim", opts = {} } },
+    dependencies = { "echasnovski/mini.nvim" },
     cond = not vim.g.vscode,
     ---@module "oil"
     ---@type oil.SetupOpts
@@ -35,6 +35,7 @@ return {
             ["<A-l>"] = { "actions.refresh" },
             ["<leader>sf"] = {
                 function()
+                    ---@diagnostic disable-next-line
                     Snacks.picker.files {
                         cwd = require("oil").get_current_dir(),
                     }
@@ -52,6 +53,7 @@ return {
             },
             ["<leader>sg"] = {
                 function()
+                    ---@diagnostic disable-next-line
                     Snacks.picker.grep {
                         cwd = require("oil").get_current_dir(),
                     }
@@ -70,7 +72,7 @@ return {
             "n",
             "-",
             require("oil").open,
-            { desc = "(Oil) Open parent directory" }
+            { desc = "Oil: Open parent directory" }
         )
     end,
 }

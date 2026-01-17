@@ -42,14 +42,6 @@ return {
         -- See :h blink-cmp-config-keymap for defining your own keymap
         keymap = {
             preset = "super-tab",
-            ["<C-Space>"] = {
-                function()
-                    vim.api.nvim_echo({ { "<C-Space> received" } }, false, {})
-                end,
-                "show",
-                "show_documentation",
-                "hide_documentation",
-            },
             ["<C-o>"] = {
                 "show",
                 "show_documentation",

@@ -69,8 +69,10 @@ return {
                 },
             },
         },
+        input = {},
+        terminal = {},
         notifier = { enabled = true, style = "fancy" },
-        -- zen = {},
+        zen = {},
     },
     init = function()
         -- Advanced LSP Progress
@@ -430,6 +432,38 @@ return {
             end,
             mode = { "n" },
             desc = "Delete buffer without disrupting window layout",
+        },
+        -- Terminal
+        {
+            "<A-t>",
+            function()
+                Snacks.terminal.toggle(nil, {
+                    start_insert = true,
+                    auto_insert = false,
+                    auto_close = true,
+                    win = {
+                        style = "terminal",
+                        position = "float",
+                        height = 0.9,
+                        width = 0.6,
+                        min_width = 80,
+                    },
+                })
+            end,
+            mode = { "n", "t" },
+            desc = "Toggle Snacks terminal",
+        },
+        {
+            "<C-`>",
+            function()
+                Snacks.terminal.toggle(nil, {
+                    start_insert = true,
+                    auto_insert = false,
+                    auto_close = true,
+                })
+            end,
+            mode = { "n", "t" },
+            desc = "Toggle Snacks terminal",
         },
     },
 }
