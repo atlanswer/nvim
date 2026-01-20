@@ -81,6 +81,14 @@ return {
             desc = "[Multicursor] Visual match cursors interactively",
         },
         {
+            "S",
+            function()
+                require("multicursor-nvim").splitCursors()
+            end,
+            mode = "x",
+            desc = "[Multicursor] Split visual selections interactively",
+        },
+        {
             "<A-a>",
             function()
                 require("multicursor-nvim").searchAllAddCursors()
