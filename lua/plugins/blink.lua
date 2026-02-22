@@ -18,7 +18,7 @@ return {
         "folke/lazydev.nvim",
         "echasnovski/mini.nvim",
     },
-    event = "VimEnter",
+    -- event = "VimEnter",
     cond = not vim.g.vscode,
     -- use a release tag to download pre-built binaries
     version = "1.*",
