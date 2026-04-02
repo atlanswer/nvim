@@ -124,7 +124,7 @@ vim.keymap.set(
 
 -- Diagnostic
 vim.keymap.set("n", "<leader>e", function()
-    vim.diagnostic.open_float { source = true }
+    vim.diagnostic.open_float()
 end, { desc = "Show diagnostic [E]rror messages" })
 vim.keymap.set(
     "n",

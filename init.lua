@@ -134,6 +134,17 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     end,
 })
 
+-- Diagnostic configs
+vim.diagnostic.config {
+    update_in_insert = false,
+    severity_sort = true,
+    float = { source = true },
+    underline = { severity = { min = vim.diagnostic.severity.ERROR } },
+    virtual_text = true,
+    virtual_lines = false,
+    jump = { float = true },
+}
+
 -- Set terminal to pwsh on Windows
 if vim.fn.index(vim.fn.keys(vim.fn.environ()), "shell", 0, true) == -1 then
     vim.opt.shell = vim.fn.executable "pwsh" == 1 and "pwsh" or "powershell"
@@ -168,58 +179,6 @@ vim.api.nvim_create_autocmd("TermOpen", {
 
 -- Lazy.nvim
 require "config.lazy"
-
--- Treesitter
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = {
-        "lua",
-        "luadoc",
-        "vim",
-        "vimdoc",
-        "markdown",
-        "zig",
-        "c",
-        "cpp",
-        "cmake",
-        "rust",
-        "json",
-        "html",
-        "css",
-        "javascript",
-        "jsdoc",
-        "typescript",
-        "typescriptreact",
-        "typescript.tsx", -- really?
-        "tsx", -- What should I use?
-        "astro",
-        "python",
-        "toml",
-        "yaml",
-        "ssh_config",
-        "git_config",
-        "gitcommit",
-        "git_rebase",
-        "gitignore",
-        "gitattributes",
-        "editorconfig",
-        "bash",
-        "zsh",
-        "powershell",
-        "hyprlang",
-        "latex",
-        "kotlin",
-    },
-    callback = function()
-        -- syntax highlighting, provided by Neovim
-        vim.treesitter.start()
-        -- folds, provided by Neovim
-        vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-        vim.wo.foldmethod = "expr"
-        vim.wo.fillchars = "fold:-"
-        -- indentation, provided by nvim-treesitter
-        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-    end,
-})
 
 -- Default color scheme
 if not vim.g.vscode then
