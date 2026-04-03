@@ -89,10 +89,9 @@ return { -- Collection of various small independent plugins/modules
         MiniIcons.mock_nvim_web_devicons()
 
         local statusline = require "mini.statusline"
-        statusline.setup()
+        statusline.setup { use_icons = not vim.g.vscode }
         -- You can configure sections in the statusline by overriding their
-        -- default behavior. For example, here we disable the section for
-        -- cursor information because line numbers are already enabled
+        -- default behavior.
         ---@diagnostic disable-next-line: duplicate-set-field
         statusline.section_location = function(args)
             -- Use virtual column number to allow update when past last column
