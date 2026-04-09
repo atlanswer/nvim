@@ -1,6 +1,7 @@
 return {
     "nvim-treesitter/nvim-treesitter-textobjects",
     branch = "main",
+    cond = not vim.g.vscode,
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     lazy = false,
     opts = {

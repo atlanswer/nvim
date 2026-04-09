@@ -1,6 +1,7 @@
 return {
     "nvim-treesitter/nvim-treesitter-context",
     event = "VeryLazy",
+    cond = not vim.g.vscode,
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     opts = {
         enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
@@ -17,5 +18,4 @@ return {
         zindex = 20, -- The Z-index of the context window
         on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
     },
-    cond = not vim.g.vscode,
 }

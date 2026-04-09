@@ -3,6 +3,7 @@ return {
     name = "rose-pine",
     lazy = false,
     priority = 1000,
+    cond = not vim.g.vscode,
     opts = {
         -- variant = "auto", -- auto, main, moon, or dawn
         -- dark_variant = "main", -- main, moon, or dawn
