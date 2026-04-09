@@ -102,17 +102,33 @@ vim.keymap.set(
     '"+p',
     { desc = "Paste from system clipboard" }
 )
-vim.keymap.set("n", "<leader>P", '"+P')
-vim.keymap.set("x", "<leader>p", '"_d"+P')
+vim.keymap.set(
+    "n",
+    "<leader>P",
+    '"+P',
+    { desc = "Paste from system clipboard" }
+)
+vim.keymap.set(
+    "x",
+    "<leader>p",
+    '"_d"+p',
+    { desc = "Paste from system clipboard" }
+)
+vim.keymap.set(
+    "x",
+    "<leader>P",
+    '"_d"+P',
+    { desc = "Paste from system clipboard" }
+)
 
 -- System clipboard
 vim.keymap.set("n", "<leader>y", '"+y', { desc = "Yank to system clipboard" })
-vim.keymap.set("v", "<leader>y", '"+y')
-vim.keymap.set("n", "<leader>Y", '"+Y')
+vim.keymap.set("v", "<leader>y", '"+y', { desc = "Yank to system clipboard" })
+vim.keymap.set("n", "<leader>Y", '"+Y', { desc = "Yank to system clipboard" })
 
 -- Delete into void
 vim.keymap.set("n", "<leader>d", '"_d', { desc = "Delete into void" })
-vim.keymap.set("v", "<leader>d", '"_d')
+vim.keymap.set("v", "<leader>d", '"_d', { desc = "Delete into void" })
 
 -- Search
 vim.keymap.set(
