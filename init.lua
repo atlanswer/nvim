@@ -104,6 +104,11 @@ vim.opt.winborder = "rounded"
 --     end,
 -- })
 
+-- Suppress vscode output
+if vim.g.vscode then
+    vim.opt.cmdheight = 3
+end
+
 -- Per directory overrides
 vim.opt.exrc = true
 
