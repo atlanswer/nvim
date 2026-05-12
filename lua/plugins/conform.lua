@@ -7,6 +7,9 @@ return {
     opts = {
         notify_on_error = true,
         notify_no_formatters = true,
+        default_format_opts = {
+            lsp_format = "fallback",
+        },
         formatters_by_ft = {
             lua = { "stylua" },
             json = { "prettier" },
@@ -20,6 +23,7 @@ return {
             markdown = { "prettier" },
             yaml = { "prettier" },
             toml = { "pyproject-fmt" },
+            nix = { "nixfmt" },
         },
         formatters = {
             -- https://github.com/stevearc/conform.nvim/blob/master/lua/conform/formatters/prettier.lua
@@ -40,11 +44,9 @@ return {
     keys = {
         {
             "<leader>f",
+            mode = { "n", "v" },
             function()
-                require("conform").format {
-                    async = true,
-                    lsp_format = "fallback",
-                }
+                require("conform").format { async = true }
             end,
             desc = "[F]ormat buffer",
         },

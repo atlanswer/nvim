@@ -152,6 +152,7 @@ return {
                 -- },
                 clangd = {},
                 zls = {},
+                nixd = {},
                 bashls = {
                     cmd = {
                         "bunx",
@@ -318,6 +319,9 @@ return {
             -- lua_ls for neovim
             vim.lsp.config("lua_ls", {
                 on_init = function(client)
+                    client.server_capabilities.documentFormattingProvider =
+                        false -- Disable formatting (formatting is done by stylua)
+
                     if client.workspace_folders then
                         local path = client.workspace_folders[1].name
                         if
@@ -336,7 +340,6 @@ return {
                         client.config.settings.Lua,
                         {
                             runtime = {
-
                                 -- Tell the language server which version of Lua you're using (most
                                 -- likely LuaJIT in the case of Neovim)
                                 version = "LuaJIT",
@@ -350,24 +353,25 @@ return {
                             -- Make the server aware of Neovim runtime files
                             workspace = {
                                 checkThirdParty = false,
-                                library = {
-                                    vim.env.VIMRUNTIME,
-                                    -- Depending on the usage, you might want to add additional paths
-                                    -- here.
-                                    -- '${3rd}/luv/library',
-                                    -- '${3rd}/busted/library',
-                                },
-                                -- Or pull in all of 'runtimepath'.
-                                -- NOTE: this is a lot slower and will cause issues when working on
-                                -- your own configuration.
-                                -- See https://github.com/neovim/nvim-lspconfig/issues/3189
-                                -- library = vim.api.nvim_get_runtime_file('', true),
+                                -- NOTE: this is a lot slower and will cause issues when working on your own configuration.
+                                --  See https://github.com/neovim/nvim-lspconfig/issues/3189
+                                -- library = vim.tbl_extend(
+                                --     "force",
+                                --     vim.api.nvim_get_runtime_file("", true),
+                                --     {
+                                --         "${3rd}/luv/library",
+                                --         "${3rd}/busted/library",
+                                --     }
+                                -- ),
                             },
                         }
                     )
                 end,
+                ---@type lspconfig.settings.lua_la
                 settings = {
-                    Lua = {},
+                    Lua = {
+                        format = { enable = false }, -- Disable formatting (formatting is done by stylua)
+                    },
                 },
             })
             vim.lsp.enable "lua_ls"

@@ -36,6 +36,7 @@ return {
             "git_rebase",
             "gitignore",
             "gitattributes",
+            "jjdescription",
             "editorconfig",
             "bash",
             "zsh",
@@ -61,11 +62,17 @@ return {
             vim.wo.foldmethod = "expr"
             vim.wo.fillchars = "fold:-"
             -- Enables treesitter based indentation
-            vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+            local has_indent_query = vim.treesitter.query.get(
+                language,
+                "indents"
+            ) ~= nil
+            if has_indent_query then
+                vim.bo.indentexpr =
+                    "v:lua.require'nvim-treesitter'.indentexpr()"
+            end
         end
 
         local available_parsers = require("nvim-treesitter").get_available()
-
         vim.api.nvim_create_autocmd("FileType", {
             callback = function(args)
                 local buf, filetype = args.buf, args.match

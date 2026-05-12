@@ -1,88 +1,5 @@
--- Map leader keys
-vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
-
-vim.g.have_nerd_font = true
-
-vim.opt.linebreak = true
-vim.opt.list = true
-
--- Line numbers
-vim.opt.number = true
-vim.opt.relativenumber = true
-
-vim.opt.mouse = "a"
-
-vim.opt.showmode = false
-
-vim.opt.switchbuf = "usetab"
-vim.opt.shada = "'100,<50,s10,:100,/100,@100,h,ra:,rb:,r/tmp"
-
-vim.opt.swapfile = false
-vim.opt.undofile = true
-
-vim.opt.confirm = true
-
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
-
-vim.opt.signcolumn = "yes"
-vim.opt.colorcolumn = "81"
-
-vim.opt.updatetime = 300
-vim.opt.timeoutlen = 1000
-
-vim.opt.splitkeep = "screen"
-vim.opt.splitbelow = true
-vim.opt.splitright = true
-
-vim.opt.list = true
-vim.opt.listchars = {
-    tab = "» ",
-    trail = "·",
-    nbsp = "␣",
-    extends = "…",
-    precedes = "…",
-}
-
-vim.opt.inccommand = "split"
-vim.opt.incsearch = true
-
-vim.opt.fileformats = "unix,dos"
-
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
-
-vim.opt.cindent = true
-vim.opt.breakindent = true
-vim.opt.breakindentopt = "list:-1"
-
--- Default fold
--- vim.opt.foldenable = false
-vim.opt.foldlevel = 10
-vim.opt.foldmethod = "indent"
-vim.opt.foldnestmax = 10
-vim.opt.foldtext = ""
-
-vim.opt.scrolloff = 10
-
-vim.opt.hlsearch = true
-vim.opt.termguicolors = true
-
-vim.opt.cursorline = true
-vim.opt.cursorlineopt = "screenline,number"
-vim.opt.guicursor = "a:Cursor/lCursor,\z
-                     n-v-c:block,\z
-                     i-ci-ve:ver25-blinkwait0-blinkoff500-blinkon500,\z
-                     r-cr-o:hor20,\z
-                     sm:blinkwait0-blinkoff500-blinkon500,\z
-                     t:TermCursor"
-
-vim.opt.pumheight = 10
-
-vim.opt.winborder = "rounded"
+-- Configs
+require "config.options"
 
 -- Experimental
 -- vim.opt.cmdheight = 0
@@ -108,9 +25,6 @@ vim.opt.winborder = "rounded"
 if vim.g.vscode then
     vim.opt.cmdheight = 3
 end
-
--- Per directory overrides
-vim.opt.exrc = true
 
 -- Add empty blank line
 -- vim.api.nvim_create_autocmd("BufWritePre", {
@@ -147,7 +61,15 @@ vim.diagnostic.config {
     underline = { severity = { min = vim.diagnostic.severity.ERROR } },
     virtual_text = true,
     virtual_lines = false,
-    jump = { float = true },
+    jump = {
+        on_jump = function(_, bufnr)
+            vim.diagnostic.open_float {
+                bufnr = bufnr,
+                scope = "cursor",
+                focus = false,
+            }
+        end,
+    },
 }
 
 -- Set terminal to pwsh on Windows

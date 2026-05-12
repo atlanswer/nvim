@@ -1,30 +1,27 @@
 return {
     "dmtrKovalenko/fff.nvim",
-    cond = false,
     build = function()
-        -- this will download prebuild binary or try to use existing rustup toolchain to build from source
-        -- (if you are using lazy you can use gb for rebuilding a plugin if needed)
-        require("fff.download").download_or_build_binary()
+        -- downloads a prebuilt binary
+        require("fff.download").download_binary()
     end,
     -- if you are using nixos
     -- build = "nix run .#release",
     opts = { -- (optional)
         debug = {
-            enabled = true, -- we expect your collaboration at least during the beta
+            enabled = false,
             show_scores = true, -- to help us optimize the scoring system, feel free to share your scores!
         },
     },
-    -- No need to lazy-load with lazy.nvim.
-    -- This plugin initializes itself lazily.
+    -- This plugin initializes itself lazily
     lazy = false,
     keys = {
         {
             "<leader>sf",
             function()
-                require("fff").find_in_git_root()
+                require("fff").find_files()
             end,
             mode = { "n" },
-            desc = "FFFind files in current git repository",
+            desc = "FFFind files",
         },
         {
             "<leader>sn",
@@ -33,6 +30,34 @@ return {
             end,
             mode = { "n" },
             desc = "FFFind files in Neovim configs",
+        },
+        {
+            "<leader>sg",
+            function()
+                require("fff").live_grep()
+            end,
+            mode = { "n" },
+            desc = "LiFFFe grep",
+        },
+        {
+            "<leader>sz",
+            function()
+                require("fff").live_grep {
+                    grep = { modes = { "fuzzy", "plain" } },
+                }
+            end,
+            mode = { "n" },
+            desc = "Live FFFuzy grep",
+        },
+        {
+            "<leader>s*",
+            function()
+                require("fff").live_grep {
+                    { query = { vim.fn.expand "<cword>" } },
+                }
+            end,
+            mode = { "n" },
+            desc = "Search current word",
         },
     },
 }

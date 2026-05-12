@@ -9,9 +9,11 @@ return {
         },
         spec = {
             { "<leader>f", group = "[F]ormat" },
-            { "<leader>s", group = "[S]earch" },
-            { "<leader>t", group = "[T]oggle" },
+            { "<leader>s", group = "[S]earch", mode = { "n", "v" } },
+            { "<leader>h", group = "Git [H]unk", mode = { "n", "v" } },
             { "<leader>g", group = "[G]it" },
+            { "<leader>t", group = "[T]oggle" },
+            { "gr", group = "LSP Actions", mode = { "n" } },
         },
     },
 }

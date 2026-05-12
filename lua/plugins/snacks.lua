@@ -148,27 +148,27 @@ return {
             end,
             desc = "Snacks Picker: Smart find files",
         },
-        {
-            "<leader>sf",
-            function()
-                Snacks.picker.files()
-            end,
-            desc = "Snacks Picker: Find files",
-        },
-        {
-            "<leader>sn",
-            function()
-                Snacks.picker.files { cwd = vim.fn.stdpath "config" }
-            end,
-            desc = "Snacks Picker: Find Neovim config files",
-        },
-        {
-            "<leader>sg",
-            function()
-                Snacks.picker.grep()
-            end,
-            desc = "Snacks Picker: Grep",
-        },
+        -- {
+        --     "<leader>sf",
+        --     function()
+        --         Snacks.picker.files()
+        --     end,
+        --     desc = "Snacks Picker: Find files",
+        -- },
+        -- {
+        --     "<leader>sn",
+        --     function()
+        --         Snacks.picker.files { cwd = vim.fn.stdpath "config" }
+        --     end,
+        --     desc = "Snacks Picker: Find Neovim config files",
+        -- },
+        -- {
+        --     "<leader>sg",
+        --     function()
+        --         Snacks.picker.grep()
+        --     end,
+        --     desc = "Snacks Picker: Grep",
+        -- },
         {
             "<leader>s.",
             function()
