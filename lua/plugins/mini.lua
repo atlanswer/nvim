@@ -1,5 +1,6 @@
 return { -- Collection of various small independent plugins/modules
     "nvim-mini/mini.nvim",
+    version = false,
     config = function()
         -- Better Around/Inside textobjects
         require("mini.ai").setup {
