@@ -14,7 +14,37 @@ return {
         "neovim/nvim-lspconfig",
         dependencies = {
             "saghen/blink.cmp",
-            { "mason-org/mason.nvim", opts = {} },
+            {
+                "WhoIsSethDaniel/mason-tool-installer.nvim",
+                opts = {
+                    ensure_installed = {
+                        "prettier",
+                        "tsgo",
+                        "jsonls",
+                        "yamlls",
+                        "html",
+                        "cssls",
+                        "tailwindcss",
+                        "astro",
+                        "codebook",
+                        "bashls",
+                        "eslint",
+                    },
+                    auto_update = true,
+                },
+                dependencies = {
+                    "mason-org/mason-lspconfig.nvim",
+                    {
+                        "mason-org/mason.nvim",
+                        opts = {
+                            firewall = {
+                                enable = true,
+                                managed = false,
+                            },
+                        },
+                    },
+                },
+            },
         },
         cond = not vim.g.vscode,
         init = function()
@@ -154,22 +184,20 @@ return {
                 zls = {},
                 nixd = {},
                 bashls = {
-                    cmd = {
-                        "bunx",
-                        "--bun",
-                        "bash-language-server",
-                        "start",
-                    },
+                    --     cmd = {
+                    --         "bunx",
+                    --         "bash-language-server",
+                    --         "start",
+                    --     },
                 },
                 jsonls = {
-                    cmd = {
-                        "bunx",
-                        -- "--bun",
-                        "-p",
-                        "vscode-langservers-extracted",
-                        "vscode-json-language-server",
-                        "--stdio",
-                    },
+                    -- cmd = {
+                    --     "bunx",
+                    --     "-p",
+                    --     "vscode-langservers-extracted",
+                    --     "vscode-json-language-server",
+                    --     "--stdio",
+                    -- },
                     settings = {
                         json = {
                             schemas = require("schemastore").json.schemas {
@@ -181,37 +209,34 @@ return {
                     },
                 },
                 html = {
-                    cmd = {
-                        "bunx",
-                        -- "--bun",
-                        "-p",
-                        "vscode-langservers-extracted",
-                        "vscode-html-language-server",
-                        "--stdio",
-                    },
+                    -- cmd = {
+                    --     "bunx",
+                    --     "-p",
+                    --     "vscode-langservers-extracted",
+                    --     "vscode-html-language-server",
+                    --     "--stdio",
+                    -- },
                 },
                 cssls = {
-                    cmd = {
-                        "bunx",
-                        -- "--bun",
-                        "-p",
-                        "vscode-langservers-extracted",
-                        "vscode-css-language-server",
-                        "--stdio",
-                    },
+                    -- cmd = {
+                    --     "bunx",
+                    --     "-p",
+                    --     "vscode-langservers-extracted",
+                    --     "vscode-css-language-server",
+                    --     "--stdio",
+                    -- },
                 },
                 tsgo = {
-                    cmd = function(dispatchers, config)
-                        return vim.lsp.rpc.start({
-                            "bunx",
-                            "--bun",
-                            "-p",
-                            "@typescript/native-preview",
-                            "tsgo",
-                            "--lsp",
-                            "--stdio",
-                        }, dispatchers)
-                    end,
+                    -- cmd = function(dispatchers, config)
+                    --     return vim.lsp.rpc.start({
+                    --         "bunx",
+                    --         "-p",
+                    --         "@typescript/native-preview",
+                    --         "tsgo",
+                    --         "--lsp",
+                    --         "--stdio",
+                    --     }, dispatchers)
+                    -- end,
                     init_options = {
                         preferences = {
                             preferTypeOnlyAutoImports = true,
@@ -219,38 +244,29 @@ return {
                     },
                 },
                 tailwindcss = {
-                    cmd = {
-                        "bunx",
-                        "--bun",
-                        "-p",
-                        "@tailwindcss/language-server",
-                        "tailwindcss-language-server",
-                        "--stdio",
-                    },
+                    -- cmd = {
+                    --     "bunx",
+                    --     "-p",
+                    --     "@tailwindcss/language-server",
+                    --     "tailwindcss-language-server",
+                    --     "--stdio",
+                    -- },
                 },
                 astro = {
-                    cmd = {
-                        "bunx",
-                        "--bun",
-                        "-p",
-                        "@astrojs/language-server",
-                        "astro-ls",
-                        "--stdio",
-                    },
-                },
-                ruff = {
-                    cmd = { "uvx", "ruff", "server" },
-                },
-                ty = {
-                    cmd = { "uvx", "ty", "server" },
+                    -- cmd = {
+                    --     "bunx",
+                    --     "-p",
+                    --     "@astrojs/language-server",
+                    --     "astro-ls",
+                    --     "--stdio",
+                    -- },
                 },
                 yamlls = {
-                    cmd = {
-                        "bunx",
-                        "--bun",
-                        "yaml-language-server",
-                        "--stdio",
-                    },
+                    -- cmd = {
+                    --     "bunx",
+                    --     "yaml-language-server",
+                    --     "--stdio",
+                    -- },
                     schemaStore = {
                         -- You must disable built-in schemaStore support if you want to use
                         -- this plugin and its advanced options like `ignore`.
@@ -260,16 +276,28 @@ return {
                     },
                     schemas = require("schemastore").yaml.schemas(),
                 },
-                -- eslint = {
-                --     settings = {
-                --         format = {
-                --             enable = false,
-                --         },
-                --         experimental = {
-                --             useFlatConfig = true,
-                --         },
-                --     },
-                -- },
+                ruff = {
+                    cmd = { "uvx", "ruff", "server" },
+                },
+                ty = {
+                    cmd = { "uvx", "ty", "server" },
+                },
+                codebook = {
+                    init_options = {
+                        checkWhileTyping = false,
+                        diagnosticSeverity = "hint",
+                    },
+                },
+                eslint = {
+                    settings = {
+                        format = {
+                            enable = false,
+                        },
+                        experimental = {
+                            useFlatConfig = true,
+                        },
+                    },
+                },
                 -- taplo = {}
                 -- tinymist = {
                 --     settings = {

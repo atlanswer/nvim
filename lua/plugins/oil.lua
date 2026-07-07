@@ -35,35 +35,39 @@ return {
             ["<A-l>"] = { "actions.refresh" },
             ["<leader>sf"] = {
                 function()
-                    ---@diagnostic disable-next-line
-                    Snacks.picker.files {
-                        cwd = require("oil").get_current_dir(),
-                    }
-                    -- require("fff").find_files_in_dir(
-                    --     require("oil").get_current_dir()
-                    -- )
-                    -- desc = "FFFind files in the current directory",
+                    require("fff").find_files_in_dir(
+                        ---@diagnostic disable-next-line
+                        require("oil").get_current_dir()
+                    )
+                    -- ---@diagnostic disable-next-line
+                    -- Snacks.picker.files {
+                    --     cwd = require("oil").get_current_dir(),
+                    -- }
                     -- require("telescope.builtin").find_files {
                     --     cwd = require("oil").get_current_dir(),
                     -- }
                 end,
                 mode = { "n" },
                 nowait = true,
-                desc = "Snacks Picker: Search files in the current directory",
+                desc = "FFFind files in the current oil directory",
             },
             ["<leader>sg"] = {
                 function()
-                    ---@diagnostic disable-next-line
-                    Snacks.picker.grep {
+                    require("fff").live_grep {
+                        ---@diagnostic disable-next-line
                         cwd = require("oil").get_current_dir(),
                     }
+                    -- ---@diagnostic disable-next-line
+                    -- Snacks.picker.grep {
+                    --     cwd = require("oil").get_current_dir(),
+                    -- }
                     -- require("telescope.builtin").live_grep {
                     --     cwd = require("oil").get_current_dir(),
                     -- }
                 end,
                 mode = "n",
                 nowait = true,
-                desc = "Snacks Picker: Grep in the current directory",
+                desc = "Live grep in the current oil directory",
             },
         },
     },

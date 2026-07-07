@@ -16,7 +16,7 @@ return {
         styles = {
             bold = true,
             italic = false,
-            transparency = false,
+            transparency = true,
         },
         highlight_groups = {
             EndOfBuffer = { fg = "base" },

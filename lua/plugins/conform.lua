@@ -23,14 +23,15 @@ return {
             markdown = { "prettier" },
             yaml = { "prettier" },
             toml = { "pyproject-fmt" },
+            make = { "bake" },
             nix = { "nixfmt" },
         },
         formatters = {
             -- https://github.com/stevearc/conform.nvim/blob/master/lua/conform/formatters/prettier.lua
-            prettier = {
-                command = "bunx",
-                args = { "--bun", "prettier", "--stdin-filepath", "$FILENAME" },
-            },
+            -- prettier = {
+            --     command = "bunx",
+            --     args = { "prettier", "--stdin-filepath", "$FILENAME" },
+            -- },
             -- https://github.com/stevearc/conform.nvim/blob/master/lua/conform/formatters/pyproject-fmt.lua
             ["pyproject-fmt"] = {
                 command = "uvx",

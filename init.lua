@@ -114,3 +114,9 @@ end
 
 -- Key mappings
 require "config.keymaps"
+
+vim.filetype.add {
+    filename = {
+        ["config.ghostty"] = "conf",
+    },
+}
