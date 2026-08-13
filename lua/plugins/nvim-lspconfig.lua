@@ -19,15 +19,17 @@ return {
                 opts = {
                     ensure_installed = {
                         "prettier",
-                        "tsgo",
+                        "vtsls",
+                        -- "ts_ls",
                         "jsonls",
                         "yamlls",
                         "html",
                         "cssls",
                         "tailwindcss",
                         "astro",
-                        "codebook",
                         "bashls",
+                        "codebook",
+                        "docker_compose_language_service",
                         "eslint",
                     },
                     auto_update = true,
@@ -226,23 +228,29 @@ return {
                     --     "--stdio",
                     -- },
                 },
-                tsgo = {
-                    -- cmd = function(dispatchers, config)
-                    --     return vim.lsp.rpc.start({
-                    --         "bunx",
-                    --         "-p",
-                    --         "@typescript/native-preview",
-                    --         "tsgo",
-                    --         "--lsp",
-                    --         "--stdio",
-                    --     }, dispatchers)
-                    -- end,
-                    init_options = {
-                        preferences = {
-                            preferTypeOnlyAutoImports = true,
+                vtsls = {
+                    settings = {
+                        typescript = {
+                            preferences = {
+                                preferTypeOnlyAutoImports = true,
+                            },
+                            format = { enable = false },
+                        },
+                        javascript = {
+                            format = { enable = false },
+                        },
+                        vtsls = {
+                            autoUseWorkspaceTsdk = true,
                         },
                     },
                 },
+                -- ts_ls = {
+                --     init_options = {
+                --         preferences = {
+                --             preferTypeOnlyAutoImports = true,
+                --         },
+                --     },
+                -- },
                 tailwindcss = {
                     -- cmd = {
                     --     "bunx",
@@ -288,6 +296,7 @@ return {
                         diagnosticSeverity = "hint",
                     },
                 },
+                docker_compose_language_service = {},
                 eslint = {
                     settings = {
                         format = {

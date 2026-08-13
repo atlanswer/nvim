@@ -87,5 +87,5 @@ do
     vim.opt.winborder = "rounded"
 
     -- Per directory overrides
-    -- vim.opt.exrc = true
+    vim.opt.exrc = true
 end

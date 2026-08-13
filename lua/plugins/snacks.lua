@@ -70,7 +70,9 @@ return {
             },
         },
         input = {},
-        terminal = {},
+        terminal = {
+            win = { border = "rounded" },
+        },
         notifier = { enabled = true, style = "fancy" },
         zen = {},
     },
