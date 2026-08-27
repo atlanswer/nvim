@@ -3,7 +3,28 @@ return {
     -- version = "*",  -- Use latest tagged version for more stability
     lazy = false, -- The server is already lazy loaded
     build = "cd server && go build",
-    cond = not vim.g.vscode,
+    cond = function()
+        if vim.g.vscode then
+            return false
+        end
+
+        if vim.fn.executable "curl" == 0 then
+            vim.notify("[cursortab] curl not found", vim.log.levels.INFO)
+            return false
+        end
+
+        local suc, exitcode, code =
+            os.execute "curl -fsS --out-null localhost:9931/health"
+        if suc and exitcode == "exit" and code == 0 then
+            return true
+        else
+            vim.notify(
+                "[cursortab] curl localhost:9931/health failed",
+                vim.log.levels.INFO
+            )
+            return false
+        end
+    end,
     ---@module "cursortab.config"
     ---@type CursortabConfig
     opts = {
@@ -13,25 +34,23 @@ return {
             -- api_key_env = "MERCURY_AI_TOKEN",
 
             -- temperature = 0,
-            context_size = 2048,
-            max_tokens = 512,
+            -- context_size = 0,
+            max_tokens = 16384,
 
-            url = "http://localhost:8080",
+            url = "http://localhost:9931",
 
-            -- Zeta-2 (best local)
-            -- model = "zeta-2",
-            -- type = "zeta-2",
-
-            -- Qwen3.5-0.8B (fastest local, defaults to "inline")
-            -- url = "http://localhost:8080",
-
-            -- sweep-next-edit-0.5B/1.5B (fastest local)
-            model = "sweep-next-edit-v2-7B",
-            type = "sweep",
+            -- Zeta-2.1 (best local)
+            model = "zeta-2.1",
+            type = "zeta-2.1",
         },
         contribute_data = true,
         keymaps = {
-            trigger = "<C-/>",
+            accept = false,
+            -- trigger = "<C-/>",
+        },
+        blink = {
+            enabled = true,
+            ghost_text = false,
         },
     },
 }

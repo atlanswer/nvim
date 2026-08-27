@@ -16,6 +16,7 @@ return {
             },
         },
         "folke/lazydev.nvim",
+        -- "cursortab/cursortab.nvim",
         "echasnovski/mini.nvim",
     },
     event = "VimEnter",
@@ -130,6 +131,13 @@ return {
                     module = "lazydev.integrations.blink",
                     -- make lazydev completions top priority (see `:h blink.cmp`)
                     score_offset = 100,
+                },
+                cursortab = {
+                    module = "cursortab.blink",
+                    name = "cursortab",
+                    async = true,
+                    timeout_ms = 5000,
+                    score_offset = 50,
                 },
             },
         },
